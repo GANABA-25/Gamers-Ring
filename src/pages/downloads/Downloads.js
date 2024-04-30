@@ -1,19 +1,14 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { useLocation } from "react-router-dom";
-
+import { useUserContext } from "../../store/Auth-Context";
 import NavigationBar from "../../components/NavigationBar";
 import ScrollToTop from "../../components/ScrollToTop";
+import Comments from "../comments/Comments";
 import Footer from "../Footer";
 
 import { LuDownload } from "react-icons/lu";
 
-// import image from "../../images/pcImages/BATTLEFIED V (5).jpg";
-// import image2 from "../../images/pcImages/MORTAL KOMBAT 1 (3).jpg";
-// import image3 from "../../images/pcImages/farcry.jpg";
-// import image4 from "../../images/pcImages/little big.jpg";
-
 function StringSplitter({ text, delimiter }) {
-  // Split the text using the specified delimiter
   const parts = text.split(delimiter);
 
   return (
@@ -26,24 +21,27 @@ function StringSplitter({ text, delimiter }) {
 }
 
 const Downloads = () => {
+  const [searchedWord, setSearchedWord] = useState("");
   const { state } = useLocation();
   const payload = state && state.payload;
+  const { commentMsg } = useUserContext();
 
   const myString = payload.minimumSystemRequirement;
   const myString2 = payload.recommendedSystemRequirement;
   const myString4 = payload.downloadDescription;
   const delimiter = ",";
-
-  console.log(payload);
   return (
     <Fragment>
       <ScrollToTop />
+      <div className="max-[767px]:mb-[6.7rem] md:mb-[8.7rem] lg:my-[4.3rem]">
+        <NavigationBar
+          onHandleInputInNav={(searchWord) => {
+            setSearchedWord(searchWord);
+          }}
+        />
+      </div>
 
       <div className="max-[767px]:w-[95%] md:w-[95%] m-auto mt-0.5">
-        <div className="my-2">
-          <NavigationBar />
-        </div>
-
         <img
           className="lg:w-screen lg:h-[25rem]"
           src={payload.image}
@@ -65,27 +63,30 @@ const Downloads = () => {
             </p>
           </div>
 
-          <div>
-            <h1 className="max-[767px]:text-3xl underline underline-offset-4 font-payback tracking-wider md:text-5xl lg:text-3xl">
-              SYSTEM REQUIREMENTS
-            </h1>
+          {payload.minimumSystemRequirement &&
+            payload.recommendedSystemRequirement && (
+              <div>
+                <h1 className="max-[767px]:text-3xl underline underline-offset-4 font-payback tracking-wider md:text-5xl lg:text-3xl">
+                  SYSTEM REQUIREMENTS
+                </h1>
 
-            <span className="font-serif">
-              <h1 className="max-[767px]:my-2 font-bold tracking-wider md:text-xl md:my-3">
-                MINIMUM REQUIREMENTS
-              </h1>
-              <span className="md:text-xl tracking-wider lg:text-sm">
-                <StringSplitter text={myString} delimiter={delimiter} />
-              </span>
+                <span className="font-serif">
+                  <h1 className="max-[767px]:my-2 font-bold tracking-wider md:text-xl md:my-3">
+                    MINIMUM REQUIREMENTS
+                  </h1>
+                  <span className="md:text-xl tracking-wider lg:text-sm">
+                    <StringSplitter text={myString} delimiter={delimiter} />
+                  </span>
 
-              <h1 className="max-[767px]:my-2 font-bold tracking-wider md:text-xl md:my-3">
-                RECOMMENDED REQUIREMENTS
-              </h1>
-              <span className="md:text-xl tracking-wider lg:text-sm">
-                <StringSplitter text={myString2} delimiter={delimiter} />
-              </span>
-            </span>
-          </div>
+                  <h1 className="max-[767px]:my-2 font-bold tracking-wider md:text-xl md:my-3">
+                    RECOMMENDED REQUIREMENTS
+                  </h1>
+                  <span className="md:text-xl tracking-wider lg:text-sm">
+                    <StringSplitter text={myString2} delimiter={delimiter} />
+                  </span>
+                </span>
+              </div>
+            )}
         </section>
 
         <section className="max-[767px]:my-4">
@@ -96,7 +97,7 @@ const Downloads = () => {
             {payload.version}
           </p>
 
-          <button className="max-[767px]:my-4 max-[767px]:p-3 font-payback flex justify-center items-center gap-5 text-white bg-blue-600 hover:bg-blue-700 group hover:text-red-600 relative transition-all duration-300 md:p-4 md:my-4 lg:p-2">
+          <button className="max-[767px]:my-4 max-[767px]:p-3 font-payback flex justify-center items-center gap-5 text-white bg-blue-600 hover:bg-blue-700 group hover:text-red-600 transition-all duration-300 md:p-4 md:my-4 lg:p-2">
             <span className="text-white md:text-2xl lg:text-xl">
               {payload.button}
             </span>
@@ -105,9 +106,24 @@ const Downloads = () => {
             </span>
           </button>
         </section>
+        <section>
+          <Comments />
+        </section>
 
-        <Footer />
+        <section>
+          <section className="max-[767px]:my-8 md:my-10">
+            <h1 className="font-payback tracking-widest bg-black text-white max-[767px]:w-[7rem] max-[767px]:p-1 md:w-[11rem] md:p-4 md:text-2xl lg:text-xl lg:w-[9rem] lg:p-3">
+              COMMENTS
+            </h1>
+            <hr className="bg-black h-0.5" />
+            <div className="my-4">
+              <h1>{commentMsg.UserName} </h1>
+              <h1>{commentMsg.UserComment}</h1>
+            </div>
+          </section>
+        </section>
       </div>
+      <Footer />
     </Fragment>
   );
 };

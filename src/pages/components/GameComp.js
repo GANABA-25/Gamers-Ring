@@ -23,7 +23,7 @@ const GameComp = (props) => {
               <img className="" src={props.image3} alt="downloadimage" />
             </>
           ) : (
-            <img className="" src={props.image} alt="pcGamesImage" />
+            <img src={props.image} alt="pcGamesImage" />
           )}
           <div className="m-2">
             <h1 className="font-payback my-2 max-[767px]:text-md tracking-wide md:text-[1.8rem] lg:text-xl">

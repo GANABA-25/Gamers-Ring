@@ -1,15 +1,100 @@
-import React, { Fragment } from "react";
+import { Fragment, useState } from "react";
+
 import NavigationBar from "../../components/NavigationBar";
-import RecentlyAdded from "../../components/RecentlyAdded";
-import ReadMoreBtn from "../../components/ReadMoreBtn";
-import NextPage from "./NextPage";
+import NextPage from "../../components/NextPage";
+import Information from "../../components/Information";
 import ScrollToTop from "../../components/ScrollToTop";
 import Footer from "../Footer";
 
-import { MdNotificationAdd } from "react-icons/md";
-import { MdOutlineNoiseAware } from "react-icons/md";
-
 const pcGamesData = [
+  {
+    image:
+      "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713686252/GAMERS%20RING/PC%20GAMES/Assassins_creed_uwxj0o.jpg",
+    image1:
+      "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713686315/GAMERS%20RING/PC%20GAMES/DOWNLOAD%20IMAGES/wallpaperflare.com_wallpaper_2_bpzodd.jpg",
+    image2:
+      "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713686315/GAMERS%20RING/PC%20GAMES/DOWNLOAD%20IMAGES/wallpaperflare.com_wallpaper_1_cwawp3.jpg",
+    image3:
+      "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713686313/GAMERS%20RING/PC%20GAMES/DOWNLOAD%20IMAGES/wallpaperflare.com_wallpaper_3_lrixed.jpg",
+    title: "Assassin's Creed: Ragnarok",
+    description:
+      "Assassin's Creed: Ragnarok is an action-adventure game developed and published by Ubisoft. Set in the Viking Age.",
+    downloadDescription:
+      "Embark on an epic journey through the Viking Age in Assassin's Creed: Ragnarok. Sail across the open seas, raid enemy settlements, and forge alliances in this immersive action-adventure game.",
+    minimumSystemRequirement:
+      "OS: Windows 10, Processor: Intel Core i5-4460 or AMD Ryzen 3 1200, Memory: 8 GB RAM, Graphics: NVIDIA GeForce GTX 960 or AMD Radeon R9 380, DirectX: Version 11, Storage: 50 GB available space",
+    recommendedSystemRequirement:
+      "OS: Windows 11, Processor: Intel Core i7-6700 or AMD Ryzen 5 1600, Memory: 16 GB RAM, Graphics: NVIDIA GeForce GTX 1060 or AMD Radeon RX 570, DirectX: Version 11, Storage: 50 GB available space",
+    version:
+      "This is the PC version of the game. For other platforms, check respective stores.",
+    button: "Download",
+  },
+  {
+    image:
+      "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713686252/GAMERS%20RING/PC%20GAMES/Elden_ring_yjmgs7.jpg",
+    image1:
+      "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713686312/GAMERS%20RING/PC%20GAMES/DOWNLOAD%20IMAGES/wallpaperflare.com_wallpaper_6_wdodoj.jpg",
+    image2:
+      "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713686313/GAMERS%20RING/PC%20GAMES/DOWNLOAD%20IMAGES/wallpaperflare.com_wallpaper_7_a8mhso.jpg",
+    image3:
+      "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713686312/GAMERS%20RING/PC%20GAMES/DOWNLOAD%20IMAGES/wallpaperflare.com_wallpaper_5_dnrt86.jpg",
+    title: "Elden Ring",
+    description:
+      "Embark on a journey across the Lands Between in Elden Ring. Explore mythical realms, battle formidable foes.",
+    downloadDescription:
+      "Elden Ring is an action role-playing game developed by FromSoftware and published by Bandai Namco Entertainment. Set in a fantasy world created by George R. R. Martin and Hidetaka Miyazaki, players explore vast landscapes and engage in challenging combat.",
+    minimumSystemRequirement:
+      "OS: Windows 10, Processor: Intel Core i5-2500K or AMD FX-6300, Memory: 8 GB RAM, Graphics: NVIDIA GeForce GTX 770 2GB / AMD Radeon R9 280, DirectX: Version 11, Storage: 60 GB available space",
+    recommendedSystemRequirement:
+      "OS: Windows 11, Processor: Intel Core i7-4770K or AMD Ryzen 5 1500X, Memory: 16 GB RAM, Graphics: NVIDIA GeForce GTX 1060 6GB / AMD Radeon RX 480 8GB, DirectX: Version 11, Storage: 60 GB available space",
+    version:
+      "This is the PC version of the game. For other platforms, check respective stores.",
+    button: "Download",
+  },
+  {
+    image:
+      "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713686251/GAMERS%20RING/PC%20GAMES/Witcher_lxflpj.jpg",
+    image1:
+      "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713686302/GAMERS%20RING/PC%20GAMES/DOWNLOAD%20IMAGES/wallpaperflare.com_wallpaper_13_zqrihp.jpg",
+    image2:
+      "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713686301/GAMERS%20RING/PC%20GAMES/DOWNLOAD%20IMAGES/wallpaperflare.com_wallpaper_14_mywxjf.jpg",
+    image3:
+      "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713686300/GAMERS%20RING/PC%20GAMES/DOWNLOAD%20IMAGES/wallpaperflare.com_wallpaper_15_hbld11.jpg",
+    title: "The Witcher III",
+    description:
+      "The Witcher II: is an action role-playing game developed and published by CD Projekt. Continuing the story of Geralt of Rivia.",
+    downloadDescription:
+      "Return to the world of The Witcher in this thrilling new installment. Navigate treacherous landscapes, encounter mythical creatures, and make choices that shape the fate of the realm.",
+    minimumSystemRequirement:
+      "OS: Windows 10, Processor: Intel Core i5-8400 or AMD Ryzen 5 2600, Memory: 16 GB RAM, Graphics: NVIDIA GeForce GTX 1060 or AMD Radeon RX 580, DirectX: Version 12, Storage: 70 GB available space",
+    recommendedSystemRequirement:
+      "OS: Windows 11, Processor: Intel Core i7-9700 or AMD Ryzen 7 3700X, Memory: 32 GB RAM, Graphics: NVIDIA GeForce RTX 3060 or AMD Radeon RX 6700 XT, DirectX: Version 12, Storage: 70 GB available space",
+    version:
+      "This is the PC version of the game. For other platforms, check respective stores.",
+    button: "Download",
+  },
+  {
+    image:
+      "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713686251/GAMERS%20RING/PC%20GAMES/Starfield_plxbeu.jpg",
+    image1:
+      "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713686297/GAMERS%20RING/PC%20GAMES/DOWNLOAD%20IMAGES/wallpaperflare.com_wallpaper_17_uwi0ec.jpg",
+    image2:
+      "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713686296/GAMERS%20RING/PC%20GAMES/DOWNLOAD%20IMAGES/wallpaperflare.com_wallpaper_18_wh5qer.jpg",
+    image3:
+      "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713686295/GAMERS%20RING/PC%20GAMES/DOWNLOAD%20IMAGES/wallpaperflare.com_wallpaper_19_udknpp.jpg",
+    title: "Starfield",
+    description:
+      "Starfield is a space exploration game developed by Bethesda Game Studios. Set in an open universe, players take on the role of a space explorer.",
+    downloadDescription:
+      "Embark on an interstellar journey in Starfield. Explore alien worlds, encounter strange creatures, and uncover the secrets of the universe in this epic space adventure.",
+    minimumSystemRequirement:
+      "OS: Windows 10, Processor: Intel Core i5-8400 or AMD Ryzen 5 3600, Memory: 16 GB RAM, Graphics: NVIDIA GeForce GTX 1070 or AMD Radeon RX 5700 XT, DirectX: Version 12, Storage: 100 GB available space",
+    recommendedSystemRequirement:
+      "OS: Windows 11, Processor: Intel Core i7-9700K or AMD Ryzen 7 3700X, Memory: 32 GB RAM, Graphics: NVIDIA GeForce RTX 2080 or AMD Radeon RX 6800 XT, DirectX: Version 12, Storage: 100 GB available space",
+    version:
+      "This is the PC version of the game. For other platforms, check respective stores.",
+    button: "Download",
+  },
   {
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1712156035/GAMERS%20RING/PC%20GAMES/fifa_22_u1ue0x.jpg",
@@ -144,6 +229,28 @@ const pcGamesData = [
   },
   {
     image:
+      "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713686308/GAMERS%20RING/PC%20GAMES/DOWNLOAD%20IMAGES/wallpaperflare.com_wallpaper_8_t1ayqo.jpg",
+    image1:
+      "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713686303/GAMERS%20RING/PC%20GAMES/DOWNLOAD%20IMAGES/wallpaperflare.com_wallpaper_9_k3n2fn.jpg",
+    image2:
+      "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713686303/GAMERS%20RING/PC%20GAMES/DOWNLOAD%20IMAGES/wallpaperflare.com_wallpaper_10_jrenlv.jpg",
+    image3:
+      "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713686303/GAMERS%20RING/PC%20GAMES/DOWNLOAD%20IMAGES/wallpaperflare.com_wallpaper_11_cgepkg.jpg",
+    title: "Cyberpunk 2077",
+    description:
+      "Cyberpunk 2078 is an action role-playing game developed and published by CD Projekt. Set in the dystopian Night City.",
+    downloadDescription:
+      "Cyberpunk 2077 is a 2020 action role-playing video game developed by CD Projekt Red and published by CD Projekt, and based on Mike Pondsmith's Cyberpunk tabletop game series. The plot is set in the fictional metropolis of Night City, California within the dystopian Cyberpunk universe.",
+    minimumSystemRequirement:
+      "OS: Windows 10, Processor: Intel Core i5-3570K or AMD FX-8310, Memory: 8 GB RAM, Graphics: NVIDIA GeForce GTX 780 or AMD Radeon RX 470, DirectX: Version 12, Storage: 70 GB available space",
+    recommendedSystemRequirement:
+      "OS: Windows 11, Processor: Intel Core i7-4790 or AMD Ryzen 5 2600, Memory: 16 GB RAM, Graphics: NVIDIA GeForce GTX 1070 or AMD Radeon RX Vega 64, DirectX: Version 12, Storage: 70 GB available space",
+    version:
+      "This is the PC version of the game. For other platforms, check respective stores.",
+    button: "Download",
+  },
+  {
+    image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1712156047/GAMERS%20RING/PC%20GAMES/god_fo_war_p4mkhb.jpg",
     image1:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713647417/GAMERS%20RING/PC%20GAMES/DOWNLOAD%20IMAGES/GOD_OF_WAR_1_1_x3ay1o.jpg",
@@ -205,132 +312,200 @@ const pcGamesData = [
       "This is the PC VERSION OF THE GAME. if You wont another version or on a different platform navigate to that section.",
     button: "Download",
   },
+
+  // {
+  //   image: "https://cdn.example.com/game7_image.jpg",
+  //   image1: "https://cdn.example.com/game7_screenshot1.jpg",
+  //   image2: "https://cdn.example.com/game7_screenshot2.jpg",
+  //   image3: "https://cdn.example.com/game7_screenshot3.jpg",
+  //   title: "Final Fantasy XVI",
+  //   description:
+  //     "Final Fantasy XVI is a role-playing game developed and published by Square Enix. Set in the world of Valisthea, players embark on a journey of redemption and revenge amidst political turmoil.",
+  //   downloadDescription:
+  //     "Experience the next chapter in the iconic Final Fantasy series. Dive into a richly detailed world, battle fearsome foes, and uncover the truth behind the struggle for power in Final Fantasy XVI.",
+  //   minimumSystemRequirement:
+  //     "OS: Windows 10, Processor: Intel Core i5-8400 or AMD Ryzen 5 1600, Memory: 16 GB RAM, Graphics: NVIDIA GeForce GTX 1060 or AMD Radeon RX 570, DirectX: Version 12, Storage: 100 GB available space",
+  //   recommendedSystemRequirement:
+  //     "OS: Windows 11, Processor: Intel Core i7-9700 or AMD Ryzen 7 3700X, Memory: 32 GB RAM, Graphics: NVIDIA GeForce RTX 3070 or AMD Radeon RX 6700 XT, DirectX: Version 12, Storage: 100 GB available space",
+  //   version:
+  //     "This is the PC version of the game. For other platforms, check respective stores.",
+  //   button: "Download",
+  // },
+  // {
+  //   image: "https://cdn.example.com/game8_image.jpg",
+  //   image1: "https://cdn.example.com/game8_screenshot1.jpg",
+  //   image2: "https://cdn.example.com/game8_screenshot2.jpg",
+  //   image3: "https://cdn.example.com/game8_screenshot3.jpg",
+  //   title: "The Elder Scrolls VI",
+  //   description:
+  //     "The Elder Scrolls VI is an upcoming action role-playing game developed by Bethesda Game Studios. Set in the vast continent of Tamriel, players embark on an epic quest to uncover the secrets of the land.",
+  //   downloadDescription:
+  //     "Prepare to return to the world of Tamriel in the highly anticipated Elder Scrolls VI. Explore diverse landscapes, encounter legendary creatures, and shape the fate of the realm in this epic RPG.",
+  //   minimumSystemRequirement:
+  //     "OS: Windows 10, Processor: Intel Core i5-8400 or AMD Ryzen 5 2600, Memory: 16 GB RAM, Graphics: NVIDIA GeForce GTX 1070 or AMD Radeon RX 5700 XT, DirectX: Version 12, Storage: 100 GB available space",
+  //   recommendedSystemRequirement:
+  //     "OS: Windows 11, Processor: Intel Core i7-9700K or AMD Ryzen 7 3700X, Memory: 32 GB RAM, Graphics: NVIDIA GeForce RTX 3080 or AMD Radeon RX 6800 XT, DirectX: Version 12, Storage: 100 GB available space",
+  //   version:
+  //     "This is the PC version of the game. For other platforms, check respective stores.",
+  //   button: "Download",
+  // },
+  // {
+  //   image: "https://cdn.example.com/game9_image.jpg",
+  //   image1: "https://cdn.example.com/game9_screenshot1.jpg",
+  //   image2: "https://cdn.example.com/game9_screenshot2.jpg",
+  //   image3: "https://cdn.example.com/game9_screenshot3.jpg",
+  //   title: "Horizon Forbidden West",
+  //   description:
+  //     "Horizon Forbidden West is an action role-playing game developed by Guerrilla Games. Set in a post-apocalyptic world inhabited by robotic creatures, players assume the role of Aloy as she ventures into the Forbidden West.",
+  //   downloadDescription:
+  //     "Explore the mysteries of the Forbidden West in this highly anticipated sequel to Horizon Zero Dawn. Battle mechanical beasts, uncover ancient secrets, and discover the truth about Aloy's origins.",
+  //   minimumSystemRequirement:
+  //     "OS: Windows 10, Processor: Intel Core i5-6600K or AMD Ryzen 5 1600, Memory: 16 GB RAM, Graphics: NVIDIA GeForce GTX 1060 6GB or AMD Radeon RX 580 8GB, DirectX: Version 12, Storage: 100 GB available space",
+  //   recommendedSystemRequirement:
+  //     "OS: Windows 11, Processor: Intel Core i7-9700K or AMD Ryzen 7 3700X, Memory: 32 GB RAM, Graphics: NVIDIA GeForce RTX 3060 12GB or AMD Radeon RX 6700 XT 12GB, DirectX: Version 12, Storage: 100 GB available space",
+  //   version:
+  //     "This is the PC version of the game. For other platforms, check respective stores.",
+  //   button: "Download",
+  // },
+  // {
+  //   image: "https://cdn.example.com/game10_image.jpg",
+  //   image1: "https://cdn.example.com/game10_screenshot1.jpg",
+  //   image2: "https://cdn.example.com/game10_screenshot2.jpg",
+  //   image3: "https://cdn.example.com/game10_screenshot3.jpg",
+  //   title: "God of War: Ragnarok",
+  //   description:
+  //     "God of War: Ragnarok is an action-adventure game developed by Santa Monica Studio. Continuing the story of Kratos and Atreus, players journey to the realm of Norse mythology to confront the Norse gods.",
+  //   downloadDescription:
+  //     "Enter the realm of Norse mythology in God of War: Ragnarok. Embark on a journey of vengeance and redemption, battle gods and monsters, and uncover the truth behind Ragnarok.",
+  //   minimumSystemRequirement:
+  //     "OS: Windows 10, Processor: Intel Core i5-8400 or AMD Ryzen 5 2600, Memory: 16 GB RAM, Graphics: NVIDIA GeForce GTX 1060 6GB or AMD Radeon RX 580 8GB, DirectX: Version 12, Storage: 100 GB available space",
+  //   recommendedSystemRequirement:
+  //     "OS: Windows 11, Processor: Intel Core i7-9700K or AMD Ryzen 7 3700X, Memory: 32 GB RAM, Graphics: NVIDIA GeForce RTX 3070 8GB or AMD Radeon RX 6800 XT 16GB, DirectX: Version 12, Storage: 100 GB available space",
+  //   version:
+  //     "This is the PC version of the game. For other platforms, check respective stores.",
+  //   button: "Download",
+  // },
+  // {
+  //   image: "https://cdn.example.com/game11_image.jpg",
+  //   image1: "https://cdn.example.com/game11_screenshot1.jpg",
+  //   image2: "https://cdn.example.com/game11_screenshot2.jpg",
+  //   image3: "https://cdn.example.com/game11_screenshot3.jpg",
+  //   title: "Grand Theft Auto VI",
+  //   description:
+  //     "Grand Theft Auto VI is an action-adventure game developed and published by Rockstar Games. Set in the fictional city of Vice City, players embark on a criminal underworld journey filled with heists, car chases, and mayhem.",
+  //   downloadDescription:
+  //     "Return to the vibrant streets of Vice City in Grand Theft Auto VI. Explore a sprawling open-world, engage in thrilling missions, and build your criminal empire in this highly anticipated sequel.",
+  //   minimumSystemRequirement:
+  //     "OS: Windows 10, Processor: Intel Core i5-8400 or AMD Ryzen 5 3600, Memory: 16 GB RAM, Graphics: NVIDIA GeForce GTX 1060 6GB or AMD Radeon RX 5700 XT 8GB, DirectX: Version 12, Storage: 100 GB available space",
+  //   recommendedSystemRequirement:
+  //     "OS: Windows 11, Processor: Intel Core i7-9700K or AMD Ryzen 7 3700X, Memory: 32 GB RAM, Graphics: NVIDIA GeForce RTX 3070 8GB or AMD Radeon RX 6800 XT 16GB, DirectX: Version 12, Storage: 100 GB available space",
+  //   version:
+  //     "This is the PC version of the game. For other platforms, check respective stores.",
+  //   button: "Download",
+  // },
+];
+
+const RecentlyAddedData = [
   {
     image:
-      "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1712156035/GAMERS%20RING/PC%20GAMES/fifa_22_u1ue0x.jpg",
-    image1:
-      "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1712156046/GAMERS%20RING/PC%20GAMES/fifa-4_vbline.jpg",
-    image2:
-      "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1712156044/GAMERS%20RING/PC%20GAMES/fifa-1_p39bet.jpg",
-    image3:
-      "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1712156040/GAMERS%20RING/PC%20GAMES/fifa_23_2_xuzmft.jpg",
-    title: "CALL OF DUTY 4",
-    description:
-      "Call of Duty: Modern Warfare is a 2019 first-person shooter game developed by Infinity Ward.",
-    downloadDescription: "",
-    minimumSystemRequirement: "",
-    recommendedSystemRequirement: "",
-    version:
-      "This is the PC VERSION OF THE GAME. if You wont another version or on a different platform navigate to that section.",
-    button: "Download",
+      "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713686308/GAMERS%20RING/PC%20GAMES/DOWNLOAD%20IMAGES/wallpaperflare.com_wallpaper_8_t1ayqo.jpg",
+    title: "CYBERPUNK 2077",
+    date: "March 5, 2022",
+  },
+  {
+    image:
+      "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713686251/GAMERS%20RING/PC%20GAMES/Starfield_plxbeu.jpg",
+    title: "Starfield",
+    date: "January 25, 2021",
+  },
+  {
+    image:
+      "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713686251/GAMERS%20RING/PC%20GAMES/Witcher_lxflpj.jpg",
+    title: "THE WITCHER III",
+    date: "December 30, 2023",
   },
 ];
 
-const RecentGamesData = [
+const backgroundImages = [
   {
-    image:
-      "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1712156035/GAMERS%20RING/PC%20GAMES/fifa_22_u1ue0x.jpg",
-    title: "FIFA 23",
-    date: "March 20, 2023",
+    url: "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713647412/GAMERS%20RING/PC%20GAMES/DOWNLOAD%20IMAGES/GHOST_RECON_1_2_afjakx.jpg",
+    alt: "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1712156047/GAMERS%20RING/PC%20GAMES/ghost_recon_z7lpld.jpg",
   },
   {
-    image:
-      "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1712156035/GAMERS%20RING/PC%20GAMES/fifa_22_u1ue0x.jpg",
-    title: "FIFA 23",
-    date: "March 20, 2023",
+    url: "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713916008/GAMERS%20RING/PC%20GAMES/3916609_swcds6.jpg",
+    alt: "Image 2",
   },
   {
-    image:
-      "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1712156035/GAMERS%20RING/PC%20GAMES/fifa_22_u1ue0x.jpg",
-    title: "FIFA 23",
-    date: "March 20, 2023",
+    url: "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713916009/GAMERS%20RING/PC%20GAMES/wallpaperflare.com_wallpaper_jgwmc1.jpg",
+    alt: "Image 3",
   },
 ];
 
-const HomePage = (props) => {
-  const productsPerPage = 9;
+const HomePage = () => {
+  const [searchedWord, setSearchedWord] = useState("");
+
+  const filteredProducts = pcGamesData.filter((gameData) =>
+    gameData.title.toLowerCase().includes(searchedWord.toLowerCase())
+  );
+
+  const productsToDisplay = searchedWord.trim()
+    ? filteredProducts
+    : pcGamesData;
+
+  if (productsToDisplay.length === 0) {
+    return (
+      <>
+        <ScrollToTop />
+        <NavigationBar
+          onHandleInputInNav={(searchWord) => {
+            setSearchedWord(searchWord);
+          }}
+          background="https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713647417/GAMERS%20RING/PC%20GAMES/DOWNLOAD%20IMAGES/GHOST_RECON_1_3_cxqjai.jpg"
+          images={backgroundImages}
+        />
+        <div className="max-[767px]:w-[95%] md:w-[95%] m-auto">
+          <div className="font-serif lg:grid lg:grid-cols-4 lg:gap-3 ">
+            <section className="col-span-3">
+              <h1 className="text-xl">No results for {searchedWord}</h1>
+              <p>Try checking your spelling or use more general terms</p>
+            </section>
+
+            <section className="max-[767px]:my-4 col-span-1 md:my-8 lg:my-0">
+              <Information
+                recentGamesData={RecentlyAddedData}
+                platform="THIS PAGE CONTAINS ONLY PC GAMES"
+              />
+            </section>
+          </div>
+        </div>
+      </>
+    );
+  }
 
   return (
     <Fragment>
-      <NavigationBar />
+      <ScrollToTop />
+      <NavigationBar
+        onHandleInputInNav={(searchWord) => {
+          setSearchedWord(searchWord);
+        }}
+        background="https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713647417/GAMERS%20RING/PC%20GAMES/DOWNLOAD%20IMAGES/GHOST_RECON_1_3_cxqjai.jpg"
+        images={backgroundImages}
+      />
       <div className="max-[767px]:w-[95%] md:w-[95%] m-auto">
-        <ScrollToTop />
         <div className="font-serif lg:grid lg:grid-cols-4 lg:gap-3 ">
           <section className="col-span-3">
-            <NextPage
-              pcGamesData={pcGamesData}
-              productsPerPage={productsPerPage}
-            />
+            <NextPage data={productsToDisplay} itemsPerPage="9" />
           </section>
           <section className="max-[767px]:my-4 col-span-1 md:my-8 lg:my-0">
-            <div className="border-2 border-gray-500">
-              <div className="max-[767px]:p-2 shadow-2xl shadow-gray-200 border-b-2 border-gray-500 bg-blue-600 flex justify-center items-center max-[767px]:gap-4 md:gap-5 md:p-3 lg:p-2">
-                <MdNotificationAdd className="text-white max-[767px]:text-5xl md:text-6xl lg:text-4xl" />
-                <h1 className="max-[767px]:text-2xl text-white font-black md:text-4xl lg:text-xl">
-                  RECENTLY ADDED
-                </h1>
-              </div>
-
-              <div className="max-[767px]:my-4 grid gap-4 md:my-4">
-                {RecentGamesData.map((recentgames) => (
-                  <RecentlyAdded
-                    image={recentgames.image}
-                    title={recentgames.title}
-                    date={recentgames.date}
-                  />
-                ))}
-              </div>
-            </div>
-
-            <div className="max-[767px]:my-4 max-[767px]:p-2 grid max-[767px]:gap-2 text-center bg-gray-300 md:gap-5 md:my-4 md:p-4 lg:gap-4">
-              <span className="flex justify-center items-center max-[767px]:gap-4 md:gap-5">
-                <h1 className="max-[767px]:text-2xl font-bold md:text-3xl lg:text-xl">
-                  NOTE
-                </h1>
-                <MdOutlineNoiseAware className="max-[767px]:text-2xl text-red-600 md:text-4xl" />
-              </span>
-              <p className="md:text-xl lg:text-base">
-                The search box above allows you to such for games on This Page
-                only,Please Navigate to other pages to download for other
-                platforms.
-              </p>
-              <h1 className="max-[767px]:my-2 font-bold lg:text-sm">
-                THIS PAGE CONTAINS ONLY PC GAMERS
-              </h1>
-            </div>
-
-            <div className="max-[767px]:my-4 max-[767px]:p-2 grid max-[767px]:gap-3 text-center bg-gray-300 md:my-4 md:p-4 md:gap-5">
-              <h1 className="max-[767px]:text-2xl font-bold md:text-3xl lg:text-xl">
-                ULTIMATE GUIDE TO INSTALL GAMES
-              </h1>
-              <img
-                src={
-                  "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1712156036/GAMERS%20RING/PC%20GAMES/farcry_vlh8qb.jpg"
-                }
-                alt="guidImage"
-              />
-              <p className="md:text-2xl lg:text-base">
-                orem ipsum dolor sit amet consectetur adipisicing elit.
-                Repellendus, quidem.
-              </p>
-              <ReadMoreBtn />
-            </div>
-
-            <div className="max-[767px]:my-4 max-[767px]:p-2 grid max-[767px]:gap-3 text-center bg-gray-300 md:my-4 md:p-4 md:gap-5">
-              <h1 className="max-[767px]:text-2xl font-bold md:text-3xl lg:text-xl">
-                HOW TO DOWNLOAD
-              </h1>
-              <p className="md:text-2xl lg:text-base">
-                orem ipsum dolor sit amet consectetur adipisicing elit.
-                Repellendus, quidem.
-              </p>
-              <ReadMoreBtn />
-            </div>
+            <Information
+              recentGamesData={RecentlyAddedData}
+              platform="THIS PAGE CONTAINS ONLY PC GAMES"
+            />
           </section>
         </div>
-
-        <Footer />
       </div>
+      <Footer />
     </Fragment>
   );
 };

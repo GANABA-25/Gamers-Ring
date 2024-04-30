@@ -1,4 +1,4 @@
-import { Fragment, useState, useEffect } from "react";
+import { Fragment, useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 import { FaBars } from "react-icons/fa6";
@@ -6,17 +6,21 @@ import { PiInstagramLogoFill } from "react-icons/pi";
 import { BsTwitterX } from "react-icons/bs";
 import { FaYoutube } from "react-icons/fa6";
 import { FaLinkedin } from "react-icons/fa";
-import { BsArrowLeft } from "react-icons/bs";
-import { BsArrowRight } from "react-icons/bs";
+import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import { FaTimes } from "react-icons/fa";
 import { IoMdSearch } from "react-icons/io";
 
 import "../pages/components/Offcanvas.css";
-import SearchInput from "../pages/components/SearchInput";
+import SearchInput from "./SearchInput";
 
-const NavigationBar = () => {
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
+
+const NavigationBar = ({ onHandleInputInNav, background, images }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isShown, setIsShown] = useState(false);
+  let sliderRef = useRef(null);
 
   const location = useLocation();
   const [pcPage, setPcPage] = useState("text-white");
@@ -31,6 +35,29 @@ const NavigationBar = () => {
 
   const toggleSearchBar = () => {
     setIsShown(!isShown);
+  };
+
+  const settings = {
+    dots: false,
+    infinite: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    speed: 2000,
+    autoplay: true,
+    autoplaySpeed: 5000,
+    prevArrow: <BsArrowLeft />,
+    nextArrow: <BsArrowRight />,
+  };
+  const NextSlide = () => {
+    if (sliderRef.current) {
+      sliderRef.current.slickNext();
+    }
+  };
+
+  const PrevSlide = () => {
+    if (sliderRef.current) {
+      sliderRef.current.slickPrev();
+    }
   };
 
   useEffect(() => {
@@ -50,6 +77,7 @@ const NavigationBar = () => {
       ? setPs5Page("underline underline-offset-4 decoration-blue-600")
       : setPs5Page("");
   }, [location.pathname]);
+
   return (
     <Fragment>
       <nav>
@@ -83,7 +111,7 @@ const NavigationBar = () => {
       </nav>
 
       {location.pathname === "/Downloads" ? (
-        <section className="bg-blue-700 max-[767px]:p-2 md:p-4 lg:p-4">
+        <section className="bg-blue-700 max-[767px]:p-2 fixed top-0 left-0 w-full md:p-4 lg:p-4">
           <div className="text-white inset-0">
             <div className="max-[767px]:mt-3 flex justify-between lg:hidden ">
               <span className="flex justify-end gap-1 text-xl md:text-3xl md:gap-3">
@@ -119,7 +147,9 @@ const NavigationBar = () => {
                   <FaYoutube className="border-2 rounded-sm p-[1px]" />
                   <FaLinkedin className="border-2 rounded-sm p-[1px]" />
                 </span>
-                <SearchInput />
+                <SearchInput
+                  onHandleInput={(searchWord) => onHandleInputInNav(searchWord)}
+                />
               </div>
 
               <ul className="md:flex md:gap-4 font-serif md:justify-end md:text-md">
@@ -147,7 +177,9 @@ const NavigationBar = () => {
             </div>
           </div>
           <div className="max-[767px]:my-2 md:mt-4 lg:hidden">
-            <SearchInput />
+            <SearchInput
+              onHandleInput={(searchWord) => onHandleInputInNav(searchWord)}
+            />
           </div>
         </section>
       ) : (
@@ -155,12 +187,11 @@ const NavigationBar = () => {
           <div className="grid grid-cols-2">
             <div className="relative">
               <img
-                src={
-                  "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713647417/GAMERS%20RING/PC%20GAMES/DOWNLOAD%20IMAGES/GHOST_RECON_1_3_cxqjai.jpg"
-                }
+                src={background}
                 alt="ghost recon"
                 className="max-[767px]:h-[15rem] w-full md:h-[30rem]"
               />
+
               <div className="max-[767px]:h-[15rem] max-[767px]:w-full md:h-[30rem] absolute inset-0 bg-whiteGray backdrop-blur-[10px]" />
               <div className="mx-3 absolute top-0 bottom-0 flex justify-center items-center max-[767px]:text-xs">
                 <span>
@@ -177,21 +208,22 @@ const NavigationBar = () => {
                   </p>
                 </span>
               </div>
-              <div className="mx-3">
-                <button className="absolute cursor-pointer max-[767px]:top-48 font-payback tracking-widest bg-blue-600 max-[767px]:text-xs max-[767px]:p-2 md:p-3 md:text-xl md:top-[25rem] lg:p-2 lg:text-sm">
-                  Read More
-                </button>
-              </div>
             </div>
 
             <div>
-              <img
-                src={
-                  "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713647412/GAMERS%20RING/PC%20GAMES/DOWNLOAD%20IMAGES/GHOST_RECON_1_2_afjakx.jpg"
-                }
-                alt="ghost recon"
-                className="max-[767px]:h-[15rem] w-full md:h-[30rem]"
-              />
+              <div className="slider-container">
+                <Slider {...settings} ref={sliderRef}>
+                  {images.map((image, index) => (
+                    <div key={index}>
+                      <img
+                        src={image.url}
+                        alt={image.alt || `Slide ${index + 1}`}
+                        className="max-[767px]:h-[15rem] w-full md:h-[30rem]"
+                      />
+                    </div>
+                  ))}
+                </Slider>
+              </div>
               <div className="mx-3 absolute top-0 bottom-0 flex justify-center items-center">
                 <div className="">
                   <h1 className="font-nostrum max-[767px]:text-[3.3rem] tracking-wide md:text-8xl lg:text-[9rem]">
@@ -212,13 +244,18 @@ const NavigationBar = () => {
                   </p>
                 </div>
               </div>
-              <span className="mx-3 absolute max-[767px]:top-48 max-[767px]:text-2xl flex gap-2 right-2 md:text-4xl md:top-[25rem]">
-                <BsArrowLeft className="border border-blue-600 hover:text-red-600" />
-                <BsArrowRight className="bg-blue-600" />
+              <span className="mx-3 absolute z-10 max-[767px]:top-48 max-[767px]:text-2xl flex gap-2 right-2 md:text-4xl md:top-[25rem]">
+                <BsArrowLeft
+                  onClick={PrevSlide}
+                  className="border border-blue-600 hover:text-blue-600 active:text-red-300"
+                />
+                <BsArrowRight
+                  onClick={NextSlide}
+                  className="bg-blue-600 hover:bg-white hover:text-blue-600 active:text-red-300"
+                />
               </span>
             </div>
           </div>
-
           <div className="mx-3 absolute text-white inset-0 my-2">
             <div className="flex justify-between lg:hidden ">
               <span className="flex justify-end gap-3 md:gap-3">
@@ -256,7 +293,9 @@ const NavigationBar = () => {
                   <FaYoutube className="border-2 rounded-sm p-[1px]" />
                   <FaLinkedin className="border-2 rounded-sm p-[1px]" />
                 </span>
-                <SearchInput />
+                <SearchInput
+                  onHandleInput={(searchWord) => onHandleInputInNav(searchWord)}
+                />
               </div>
 
               <ul className="md:flex md:items-center md:gap-4 font-serif md:justify-end md:text-md">
@@ -287,7 +326,9 @@ const NavigationBar = () => {
       )}
       {isShown && (
         <div className="lg:hidden bg-blue-600 max-[767px]:py-1 my-1 max-[767px]:px-2 max-[767px]:mb-1 md:mb-2 md:p-2">
-          <SearchInput />
+          <SearchInput
+            onHandleInput={(searchWord) => onHandleInputInNav(searchWord)}
+          />
         </div>
       )}
     </Fragment>

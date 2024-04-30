@@ -1,18 +1,18 @@
-import { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from "react-icons/md";
-import GameComp from "../components/GameComp";
-import ScrollToTop from "../../components/ScrollToTop";
+import GameComp from "../pages/components/GameComp";
+import ScrollToTop from "./ScrollToTop";
 
-const NextPage = ({ pcGamesData, productsPerPage }) => {
+const NextPage = ({ data, itemsPerPage }) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = Math.ceil(pcGamesData?.length / productsPerPage);
+  const totalPages = Math.ceil(data?.length / itemsPerPage);
 
   const handlePageChange = (newPage) => setCurrentPage(newPage);
 
   const renderProducts = () => {
-    const indexOfLastProduct = currentPage * productsPerPage;
-    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-    const currentProducts = pcGamesData?.slice(
+    const indexOfLastProduct = currentPage * itemsPerPage;
+    const indexOfFirstProduct = indexOfLastProduct - itemsPerPage;
+    const currentProducts = data?.slice(
       indexOfFirstProduct,
       indexOfLastProduct
     );
