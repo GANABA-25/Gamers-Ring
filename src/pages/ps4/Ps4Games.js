@@ -8,6 +8,7 @@ import Footer from "../Footer";
 
 const ps4GameData = [
   {
+    id: "ps4_1",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713830539/GAMERS%20RING/PS4%20GAMES/384285_ewelnw.jpg",
     image1:
@@ -25,6 +26,7 @@ const ps4GameData = [
     button: "DOWNLOAD",
   },
   {
+    id: "ps4_2",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713830556/GAMERS%20RING/PS4%20GAMES/672041_byrh43.jpg",
     image1:
@@ -42,6 +44,7 @@ const ps4GameData = [
     button: "DOWNLOAD",
   },
   {
+    id: "ps4_3",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713831223/GAMERS%20RING/PS4%20GAMES/spider_man_idft8u.jpg",
     image1:
@@ -59,6 +62,7 @@ const ps4GameData = [
     button: "DOWNLOAD",
   },
   {
+    id: "ps4_4",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713830574/GAMERS%20RING/PS4%20GAMES/wallpaperflare.com_wallpaper_7_afrwgi.jpg",
     image1:
@@ -76,6 +80,7 @@ const ps4GameData = [
     button: "DOWNLOAD",
   },
   {
+    id: "ps4_5",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713830444/GAMERS%20RING/PS4%20GAMES/wallpaperflare.com_wallpaper_10_xqcel7.jpg",
     image1:
@@ -93,6 +98,7 @@ const ps4GameData = [
     button: "DOWNLOAD",
   },
   {
+    id: "ps4_6",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713830411/GAMERS%20RING/PS4%20GAMES/7070023_xfple6.jpg",
     image1:
@@ -110,6 +116,7 @@ const ps4GameData = [
     button: "DOWNLOAD",
   },
   {
+    id: "ps4_7",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713830402/GAMERS%20RING/PS4%20GAMES/wallpaperflare.com_wallpaper_14_rl1igm.jpg",
     image1:
@@ -127,6 +134,7 @@ const ps4GameData = [
     button: "DOWNLOAD",
   },
   {
+    id: "ps4_8",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713830558/GAMERS%20RING/PS4%20GAMES/476265_lsdhnq.jpg",
     image1:
@@ -144,6 +152,7 @@ const ps4GameData = [
     button: "DOWNLOAD",
   },
   {
+    id: "ps4_9",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713830379/GAMERS%20RING/PS4%20GAMES/4522839_fh9pql.jpg",
     image1:
@@ -161,6 +170,7 @@ const ps4GameData = [
     button: "DOWNLOAD",
   },
   {
+    id: "ps4_10",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713830377/GAMERS%20RING/PS4%20GAMES/wallpaperflare.com_wallpaper_21_ktbhqv.jpg",
     image1:
@@ -178,6 +188,7 @@ const ps4GameData = [
     button: "DOWNLOAD",
   },
   {
+    id: "ps4_11",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713830334/GAMERS%20RING/PS4%20GAMES/wallpaperflare.com_wallpaper_23_lig0jd.jpg",
     image1:
@@ -195,6 +206,7 @@ const ps4GameData = [
     button: "DOWNLOAD",
   },
   {
+    id: "ps4_12",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713830366/GAMERS%20RING/PS4%20GAMES/2024122_hoqtcr.jpg",
     image1:
@@ -212,6 +224,7 @@ const ps4GameData = [
     button: "DOWNLOAD",
   },
   {
+    id: "ps4_13",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713830319/GAMERS%20RING/PS4%20GAMES/wallpaperflare.com_wallpaper_28_rshi8r.jpg",
     image1:
@@ -229,6 +242,7 @@ const ps4GameData = [
     button: "DOWNLOAD",
   },
   {
+    id: "ps4_14",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713830283/GAMERS%20RING/PS4%20GAMES/wallpaperflare.com_wallpaper_30_ky6o2i.jpg",
     image1:
@@ -246,6 +260,7 @@ const ps4GameData = [
     button: "DOWNLOAD",
   },
   {
+    id: "ps4_15",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713830276/GAMERS%20RING/PS4%20GAMES/8406384_kj3lxs.jpg",
     image1:
@@ -263,6 +278,7 @@ const ps4GameData = [
     button: "DOWNLOAD",
   },
   {
+    id: "ps4_16",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713830266/GAMERS%20RING/PS4%20GAMES/1146381_cp2dx3.jpg",
     image1:
@@ -280,6 +296,7 @@ const ps4GameData = [
     button: "DOWNLOAD",
   },
   {
+    id: "ps4_17",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713830269/GAMERS%20RING/PS4%20GAMES/wallpaperflare.com_wallpaper_36_sy8rbt.jpg",
     image1:
@@ -297,6 +314,7 @@ const ps4GameData = [
     button: "DOWNLOAD",
   },
   {
+    id: "ps4_18",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713830239/GAMERS%20RING/PS4%20GAMES/2335848_vcma90.png",
     image1:

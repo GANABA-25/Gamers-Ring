@@ -8,6 +8,7 @@ import Footer from "../Footer";
 
 const pcGamesData = [
   {
+    id: "pc1",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713686252/GAMERS%20RING/PC%20GAMES/Assassins_creed_uwxj0o.jpg",
     image1:
@@ -30,6 +31,7 @@ const pcGamesData = [
     button: "Download",
   },
   {
+    id: "pc2",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713686252/GAMERS%20RING/PC%20GAMES/Elden_ring_yjmgs7.jpg",
     image1:
@@ -52,6 +54,7 @@ const pcGamesData = [
     button: "Download",
   },
   {
+    id: "pc3",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713686251/GAMERS%20RING/PC%20GAMES/Witcher_lxflpj.jpg",
     image1:
@@ -74,6 +77,7 @@ const pcGamesData = [
     button: "Download",
   },
   {
+    id: "pc4",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713686251/GAMERS%20RING/PC%20GAMES/Starfield_plxbeu.jpg",
     image1:
@@ -96,6 +100,7 @@ const pcGamesData = [
     button: "Download",
   },
   {
+    id: "pc5",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1712156035/GAMERS%20RING/PC%20GAMES/fifa_22_u1ue0x.jpg",
     image1:
@@ -118,6 +123,7 @@ const pcGamesData = [
     button: "Download",
   },
   {
+    id: "pc6",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1712156035/GAMERS%20RING/PC%20GAMES/call_of_duty_4_qksxhs.jpg",
     image1:
@@ -140,6 +146,7 @@ const pcGamesData = [
     button: "Download",
   },
   {
+    id: "pc7",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1712156035/GAMERS%20RING/PC%20GAMES/demon_cq4cqf.jpg",
     image1:
@@ -162,6 +169,7 @@ const pcGamesData = [
     button: "Download",
   },
   {
+    id: "pc8",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1712156061/GAMERS%20RING/PC%20GAMES/halo_gsvsr5.jpg",
     image1:
@@ -184,6 +192,7 @@ const pcGamesData = [
     button: "Download",
   },
   {
+    id: "pc9",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1712156056/GAMERS%20RING/PC%20GAMES/little_big_lyopxg.jpg",
     image1:
@@ -206,6 +215,7 @@ const pcGamesData = [
     button: "Download",
   },
   {
+    id: "pc10",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1712156061/GAMERS%20RING/PC%20GAMES/prototype_mpydvp.jpg",
     image1:
@@ -228,6 +238,7 @@ const pcGamesData = [
     button: "Download",
   },
   {
+    id: "pc11",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713686308/GAMERS%20RING/PC%20GAMES/DOWNLOAD%20IMAGES/wallpaperflare.com_wallpaper_8_t1ayqo.jpg",
     image1:
@@ -250,6 +261,7 @@ const pcGamesData = [
     button: "Download",
   },
   {
+    id: "pc12",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1712156047/GAMERS%20RING/PC%20GAMES/god_fo_war_p4mkhb.jpg",
     image1:
@@ -272,6 +284,7 @@ const pcGamesData = [
     button: "Download",
   },
   {
+    id: "pc13",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1712156047/GAMERS%20RING/PC%20GAMES/ghost_recon_z7lpld.jpg",
     image1:
@@ -294,6 +307,7 @@ const pcGamesData = [
     button: "Download",
   },
   {
+    id: "pc14",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1712156035/GAMERS%20RING/PC%20GAMES/fifa_22_u1ue0x.jpg",
     image1:

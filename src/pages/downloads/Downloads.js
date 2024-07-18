@@ -23,13 +23,16 @@ function StringSplitter({ text, delimiter }) {
 const Downloads = () => {
   const [searchedWord, setSearchedWord] = useState("");
   const { state } = useLocation();
-  const payload = state && state.payload;
-  const { commentMsg } = useUserContext();
+  const payload = state?.payload || {};
+  const { userData } = useUserContext();
+
+  const id = payload.id;
 
   const myString = payload.minimumSystemRequirement;
   const myString2 = payload.recommendedSystemRequirement;
   const myString4 = payload.downloadDescription;
   const delimiter = ",";
+
   return (
     <Fragment>
       <ScrollToTop />
@@ -106,21 +109,47 @@ const Downloads = () => {
             </span>
           </button>
         </section>
-        <section>
-          <Comments />
-        </section>
 
         <section>
           <section className="max-[767px]:my-8 md:my-10">
-            <h1 className="font-payback tracking-widest bg-black text-white max-[767px]:w-[7rem] max-[767px]:p-1 md:w-[11rem] md:p-4 md:text-2xl lg:text-xl lg:w-[9rem] lg:p-3">
-              COMMENTS
-            </h1>
-            <hr className="bg-black h-0.5" />
-            <div className="my-4">
-              <h1>{commentMsg.UserName} </h1>
-              <h1>{commentMsg.UserComment}</h1>
-            </div>
+            {userData[id] && userData[id].length > 0 && (
+              <div className="my-4">
+                <div className="my-4">
+                  <div className="flex ">
+                    <p className="max-[767px]:text-xl text-white bg-blue-600 p-3 font-serif md:text-2xl lg:text-xl">
+                      {userData[id].length}
+                    </p>
+                    <h1 className="font-payback tracking-widest bg-black text-white flex items-center gap-2 max-[767px]:w-[9rem] max-[767px]:p-1 md:w-[14rem] md:p-4 md:text-2xl lg:text-xl lg:w-[12rem] lg:p-3">
+                      COMMENTS
+                    </h1>
+                  </div>
+
+                  <hr className="bg-black h-0.5" />
+                </div>
+                {userData[id].map((comment, index) => (
+                  <div
+                    key={index}
+                    className="mb-4 max-[767px]:text-[1rem] md:text-2xl lg:text-xl"
+                  >
+                    <div className="flex items-center max-[767px]:gap-2 md:gap-3 lg:gap-4">
+                      <h1 className="font-serif font-bold">
+                        {comment.UserName}
+                      </h1>
+                      <p className="opacity-80 max-[767px]:text-[0.9rem]">
+                        {comment.date.toLocaleString()}
+                      </p>
+                    </div>
+                    <p className="">{comment.UserComment}</p>
+                    <p className="my-2 opacity-80 lg:text-sm">Reply</p>
+                  </div>
+                ))}
+              </div>
+            )}
           </section>
+        </section>
+
+        <section>
+          <Comments id={id} />
         </section>
       </div>
       <Footer />

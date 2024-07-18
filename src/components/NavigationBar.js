@@ -9,6 +9,8 @@ import { FaLinkedin } from "react-icons/fa";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import { FaTimes } from "react-icons/fa";
 import { IoMdSearch } from "react-icons/io";
+import { AiOutlineHome } from "react-icons/ai";
+import { IoGameControllerOutline } from "react-icons/io5";
 
 import "../pages/components/Offcanvas.css";
 import SearchInput from "./SearchInput";
@@ -81,24 +83,46 @@ const NavigationBar = ({ onHandleInputInNav, background, images }) => {
   return (
     <Fragment>
       <nav>
-        <div className={`offcanvas ${isOpen ? "open" : ""}`}>
-          <div className="text-black text-md flex justify-center border float-end border-black rounded border-dotted mt-8 px-6 py-5 cursor-pointer w-1/12 md:text-xl">
+        <div
+          className={`offcanvas  max-[767px]:px-4 md:px-6 ${
+            isOpen ? "open" : ""
+          }`}
+        >
+          <div className="text-black text-md flex justify-between py-2 cursor-pointer md:text-xl border-b-4 ">
+            <div>
+              <h1 className="font-payback max-[767px]:text-2xl md:text-4xl">
+                Gamers Ring
+              </h1>
+            </div>
+
             <button onClick={toggleOffcanvas}>
-              <FaTimes className="hover:text-red-600 active:text-white " />
+              <FaTimes className="hover:text-red-600 text-3xl active:text-white " />
             </button>
           </div>
-          <div className="offcanvas-content font-serif mt-28 md:mt-32">
-            <ul className="text-black text-center grid justify-center items-center text-2xl gap-12 md:text-3xl ">
-              <li className={`hover:decoration-red-600`}>
+          <div className="offcanvas-content font-serif max-[767px]:my-8 md:my-10">
+            <ul className="text-black grid text-2xl max-[767px]:gap-10 md:gap-14 md:text-4xl ">
+              <li
+                className={`hover:decoration-red-600 max-[767px]:hover:text-red-600 max-[767px]:active:text-blue-600 cursor-pointer flex items-center gap-2 ${pcPage}`}
+              >
+                <AiOutlineHome />
                 <Link to="/">Pc Games</Link>
               </li>
-              <li className={`hover:decoration-red-600`}>
+              <li
+                className={`hover:decoration-red-600 max-[767px]:hover:text-red-600 max-[767px]:active:text-blue-600 cursor-pointer flex items-center gap-2 ${ps3Page}`}
+              >
+                <IoGameControllerOutline />
                 <Link to="/Ps3Games">Ps3 Games</Link>
               </li>
-              <li className={`hover:decoration-red-600`}>
+              <li
+                className={`hover:decoration-red-600 max-[767px]:hover:text-red-600 max-[767px]:active:text-blue-600 cursor-pointer flex items-center gap-2 ${ps4Page}`}
+              >
+                <IoGameControllerOutline />
                 <Link to="/Ps4Games">Ps4 Games</Link>
               </li>
-              <li className={`hover:decoration-red-600`}>
+              <li
+                className={`hover:decoration-red-600 max-[767px]:hover:text-red-600 max-[767px]:active:text-blue-600 cursor-pointer flex items-center gap-2 ${ps5Page}`}
+              >
+                <IoGameControllerOutline />
                 <Link to="/Ps5Games">Ps5 Games</Link>
               </li>
             </ul>

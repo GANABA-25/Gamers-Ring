@@ -8,6 +8,7 @@ import Footer from "../Footer";
 
 const ps5GameData = [
   {
+    id: "ps5_1",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713870424/GAMERS%20RING/PS5%20GAMES/4500579_sgqcih.jpg",
     image1:
@@ -25,6 +26,7 @@ const ps5GameData = [
     button: "DOWNLOAD",
   },
   {
+    id: "ps5_2",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713870386/GAMERS%20RING/PS5%20GAMES/5871398_ftqfav.jpg",
     image1:
@@ -42,6 +44,7 @@ const ps5GameData = [
     button: "DOWNLOAD",
   },
   {
+    id: "ps5_3",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713870353/GAMERS%20RING/PS5%20GAMES/10921943_ainu9r.jpg",
     image1:
@@ -59,6 +62,7 @@ const ps5GameData = [
     button: "DOWNLOAD",
   },
   {
+    id: "ps5_4",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713870201/GAMERS%20RING/PS5%20GAMES/1146381_q8ardx.jpg",
     image1:
@@ -76,6 +80,7 @@ const ps5GameData = [
     button: "DOWNLOAD",
   },
   {
+    id: "ps5_5",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713870198/GAMERS%20RING/PS5%20GAMES/7787663_enpgyv.jpg",
     image1:
@@ -93,6 +98,7 @@ const ps5GameData = [
     button: "DOWNLOAD",
   },
   {
+    id: "ps5_6",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713870187/GAMERS%20RING/PS5%20GAMES/4063084_b0qgb8.jpg",
     image1:
@@ -110,6 +116,7 @@ const ps5GameData = [
     button: "DOWNLOAD",
   },
   {
+    id: "ps5_7",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713870201/GAMERS%20RING/PS5%20GAMES/wallpaperflare.com_wallpaper_2_zdv8cj.jpg",
     image1:
@@ -127,6 +134,7 @@ const ps5GameData = [
     button: "DOWNLOAD",
   },
   {
+    id: "ps5_8",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713870143/GAMERS%20RING/PS5%20GAMES/wallpaperflare.com_wallpaper_3_ujmnmz.jpg",
     image1:
@@ -144,6 +152,7 @@ const ps5GameData = [
     button: "DOWNLOAD",
   },
   {
+    id: "ps5_9",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713870074/GAMERS%20RING/PS5%20GAMES/5871383_c68ead.jpg",
     image1:
@@ -161,6 +170,7 @@ const ps5GameData = [
     button: "DOWNLOAD",
   },
   {
+    id: "ps5_10",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713872139/GAMERS%20RING/PS5%20GAMES/wallpaperflare.com_wallpaper_12_ubzzyk.jpg",
     image1:
@@ -178,6 +188,7 @@ const ps5GameData = [
     button: "DOWNLOAD",
   },
   {
+    id: "ps5_11",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713870000/GAMERS%20RING/PS5%20GAMES/4112670_b0wrgh.jpg",
     image1:
@@ -195,6 +206,7 @@ const ps5GameData = [
     button: "DOWNLOAD",
   },
   {
+    id: "ps5_12",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713870401/GAMERS%20RING/PS5%20GAMES/spider_man_ghlcq4.jpg",
     image1:
@@ -212,6 +224,7 @@ const ps5GameData = [
     button: "DOWNLOAD",
   },
   {
+    id: "ps5_13",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713869994/GAMERS%20RING/PS5%20GAMES/8406384_dxo4bz.jpg",
     image1:
@@ -229,6 +242,7 @@ const ps5GameData = [
     button: "DOWNLOAD",
   },
   {
+    id: "ps5_14",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713869988/GAMERS%20RING/PS5%20GAMES/3618387_qgxhel.jpg",
     image1:
@@ -246,6 +260,7 @@ const ps5GameData = [
     button: "DOWNLOAD",
   },
   {
+    id: "ps5_15",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713869984/GAMERS%20RING/PS5%20GAMES/wallpaperflare.com_wallpaper_7_smugbj.jpg",
     image1:

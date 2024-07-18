@@ -1,15 +1,32 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useUserContext } from "../../store/Auth-Context";
 
 import { BsFillSendArrowDownFill } from "react-icons/bs";
 
-const Comments = () => {
-  const { commentMsg, setCommentMsg } = useUserContext();
+const Comments = ({ id }) => {
+  const { userData, setUserData } = useUserContext();
+  const [comments, setComments] = useState(userData[id] || []);
   const [formData, setFormData] = useState({
     UserComment: "",
     UserName: "",
     UserEmail: "",
   });
+
+  useEffect(() => {
+    setComments(userData[id] || []);
+  }, [userData, id]);
+
+  const formatDate = (date) => {
+    return date.toLocaleString("en-US", {
+      weekday: "short",
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      second: "numeric",
+    });
+  };
 
   const textAreaHandler = (e) => {
     setFormData((prevState) => {
@@ -31,7 +48,14 @@ const Comments = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    setCommentMsg(formData);
+
+    const newComment = { date: formatDate(new Date()), ...formData };
+    const newComments = [...comments, newComment];
+    const updatedUserData = { ...userData, [id]: newComments };
+
+    setComments(newComments);
+    setUserData(updatedUserData);
+
     setFormData({
       UserComment: "",
       UserName: "",
@@ -41,7 +65,7 @@ const Comments = () => {
 
   return (
     <>
-      <div className="my-20">
+      <div className="my-10">
         <form onSubmit={submitHandler}>
           <div className="grid gap-2">
             <labe className="max-[767px]:text-2xl font-payback md:text-4xl lg:text-2xl">

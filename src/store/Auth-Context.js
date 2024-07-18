@@ -5,12 +5,12 @@ const UserContext = createContext();
 export const useUserContext = () => useContext(UserContext);
 
 export function UserProvider({ children }) {
-  const [commentMsg, setCommentMsg] = useState("");
+  const [userData, setUserData] = useState([]);
   return (
     <UserContext.Provider
       value={{
-        commentMsg,
-        setCommentMsg,
+        userData,
+        setUserData,
       }}
     >
       {children}

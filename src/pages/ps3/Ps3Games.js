@@ -8,6 +8,7 @@ import Footer from "../Footer";
 
 const ps3GameData = [
   {
+    id: "ps3_1",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713700861/GAMERS%20RING/PS3%20GAMES/The_last_of_us_1_uwapj7.jpg",
     image1:
@@ -25,6 +26,7 @@ const ps3GameData = [
     button: "DOWNLOAD",
   },
   {
+    id: "ps3_2",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713777438/GAMERS%20RING/PS3%20GAMES/wallpaperflare.com_wallpaper_cmmsp5.jpg",
     image1:
@@ -42,6 +44,7 @@ const ps3GameData = [
     button: "DOWNLOAD",
   },
   {
+    id: "ps3_3",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713777422/GAMERS%20RING/PS3%20GAMES/wallpaperflare.com_wallpaper_1_kodbd0.jpg",
     image1:
@@ -59,6 +62,7 @@ const ps3GameData = [
     button: "DOWNLOAD",
   },
   {
+    id: "ps3_4",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713777433/GAMERS%20RING/PS3%20GAMES/3245562_m4aa1y.jpg",
     image1:
@@ -76,6 +80,7 @@ const ps3GameData = [
     button: "DOWNLOAD",
   },
   {
+    id: "ps3_5",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713777493/GAMERS%20RING/PS3%20GAMES/wallpaperflare.com_wallpaper_9_tenbjn.jpg",
     image1:
@@ -93,6 +98,7 @@ const ps3GameData = [
     button: "DOWNLOAD",
   },
   {
+    id: "ps3_6",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713777397/GAMERS%20RING/PS3%20GAMES/wallpaperflare.com_wallpaper_11_wbzyzh.jpg",
     image1:
@@ -110,6 +116,7 @@ const ps3GameData = [
     button: "DOWNLOAD",
   },
   {
+    id: "ps3_7",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713776977/GAMERS%20RING/PS3%20GAMES/4500579_hrdvab.jpg",
     image1:
@@ -127,6 +134,7 @@ const ps3GameData = [
     button: "DOWNLOAD",
   },
   {
+    id: "ps3_8",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713776983/GAMERS%20RING/PS3%20GAMES/7629028_obkfkl.jpg",
     image1:
@@ -144,6 +152,7 @@ const ps3GameData = [
     button: "DOWNLOAD",
   },
   {
+    id: "ps3_9",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713776978/GAMERS%20RING/PS3%20GAMES/wallpaperflare.com_wallpaper_18_qlvblb.jpg",
     image1:
@@ -162,6 +171,7 @@ const ps3GameData = [
   },
 
   {
+    id: "ps3_10",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713776979/GAMERS%20RING/PS3%20GAMES/1787648_eu92sj.jpg",
     image1:
@@ -179,6 +189,7 @@ const ps3GameData = [
     button: "DOWNLOAD",
   },
   {
+    id: "ps3_11",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713778351/GAMERS%20RING/PS3%20GAMES/RATCHET_4_vdxnl1.jpg",
     image1:
@@ -196,6 +207,7 @@ const ps3GameData = [
     button: "DOWNLOAD",
   },
   {
+    id: "ps3_12",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713776984/GAMERS%20RING/PS3%20GAMES/wallpaperflare.com_wallpaper_22_mb2wgp.jpg",
     image1:
@@ -213,6 +225,7 @@ const ps3GameData = [
     button: "DOWNLOAD",
   },
   {
+    id: "ps3_13",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713818012/GAMERS%20RING/PS3%20GAMES/1111261_zrjlcf.jpg",
     image1:
@@ -230,6 +243,7 @@ const ps3GameData = [
     button: "DOWNLOAD",
   },
   {
+    id: "ps3_14",
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713818022/GAMERS%20RING/PS3%20GAMES/476265_vxo9bp.jpg",
     image1:
