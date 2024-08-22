@@ -47,8 +47,8 @@ const NavigationBar = ({ onHandleInputInNav, background, images }) => {
     speed: 2000,
     autoplay: true,
     autoplaySpeed: 5000,
-    prevArrow: <BsArrowLeft />,
-    nextArrow: <BsArrowRight />,
+    prevArrow: "",
+    nextArrow: "",
   };
   const NextSlide = () => {
     if (sliderRef.current) {
@@ -96,7 +96,7 @@ const NavigationBar = ({ onHandleInputInNav, background, images }) => {
             </div>
 
             <button onClick={toggleOffcanvas}>
-              <FaTimes className="hover:text-red-600 text-3xl active:text-white " />
+              <FaTimes className="hover:text-red-600 text-3xl active:text-white" />
             </button>
           </div>
           <div className="offcanvas-content font-serif max-[767px]:my-8 md:my-10">
@@ -268,7 +268,7 @@ const NavigationBar = ({ onHandleInputInNav, background, images }) => {
                   </p>
                 </div>
               </div>
-              <span className="mx-3 absolute z-10 max-[767px]:top-48 max-[767px]:text-2xl flex gap-2 right-2 md:text-4xl md:top-[25rem]">
+              <div className="mx-3 absolute z-10 max-[767px]:top-48 max-[767px]:text-2xl flex gap-2 right-2 md:text-4xl md:top-[25rem]">
                 <BsArrowLeft
                   onClick={PrevSlide}
                   className="border border-blue-600 hover:text-blue-600 active:text-red-300"
@@ -277,7 +277,7 @@ const NavigationBar = ({ onHandleInputInNav, background, images }) => {
                   onClick={NextSlide}
                   className="bg-blue-600 hover:bg-white hover:text-blue-600 active:text-red-300"
                 />
-              </span>
+              </div>
             </div>
           </div>
           <div className="mx-3 absolute text-white inset-0 my-2">

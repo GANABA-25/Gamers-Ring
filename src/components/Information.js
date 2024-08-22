@@ -17,11 +17,12 @@ const Information = (props) => {
         </div>
 
         <div className="max-[767px]:my-4 grid gap-4 md:my-4">
-          {recentGamesData.map((recentgames) => (
+          {recentGamesData.map((recentGames) => (
             <RecentlyAdded
-              image={recentgames.image}
-              title={recentgames.title}
-              date={recentgames.date}
+              key={recentGames.id}
+              image={recentGames.image}
+              title={recentGames.title}
+              date={recentGames.date}
             />
           ))}
         </div>
