@@ -1,10 +1,14 @@
 import { Fragment, useState, useEffect } from "react";
+import axios from "axios";
+import Lottie from "lottie-react";
 
 import NavigationBar from "../../components/NavigationBar";
+import ScrollToTop from "../../components/ScrollToTop";
 import GameComp from "../components/GameComp";
 import Information from "../../components/Information";
-import ScrollToTop from "../../components/ScrollToTop";
-import axios from "axios";
+import loadingAnimation from "../../lottie/Animation - loading.json";
+import Pagination from "../../components/Pagination";
+
 import Footer from "../Footer";
 
 // const pcGamesData = [
@@ -466,14 +470,14 @@ const HomePage = () => {
   const [totalPages, setTotalPages] = useState(0);
 
   const category = "pcGame";
-  const fetchPcGames = async () => {
+  const fetchPcGames = async (page) => {
     try {
       const response = await axios.get(
-        `http://localhost:8090/games/PcGames/${category}`
+        `http://localhost:8090/games/PcGames/${category}?page=${page}`
       );
 
-      const { pcGames } = response.data;
-      console.log(pcGames);
+      const { totalPages, pcGames } = response.data;
+      setTotalPages(totalPages);
       setPcGamesData(pcGames);
     } catch (error) {
       console.log("Error getting PcGames", error);
@@ -481,76 +485,60 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-    fetchPcGames();
-  }, []);
+    fetchPcGames(currentPage + 1);
+  }, [currentPage]);
 
-  // const filteredProducts = pcGamesData.filter((gameData) =>
-  //   gameData.title.toLowerCase().includes(searchedWord.toLowerCase())
-  // );
-
-  // const productsToDisplay = searchedWord.trim()
-  //   ? filteredProducts
-  //   : pcGamesData;
-
-  // if (productsToDisplay.length === 0) {
-  //   return (
-  //     <>
-  //       <ScrollToTop />
-  //       <NavigationBar
-  //         onHandleInputInNav={(searchWord) => {
-  //           setSearchedWord(searchWord);
-  //         }}
-  //         background="https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713647417/GAMERS%20RING/PC%20GAMES/DOWNLOAD%20IMAGES/GHOST_RECON_1_3_cxqjai.jpg"
-  //         images={backgroundImages}
-  //       />
-  //       <div className="max-[767px]:w-[95%] md:w-[95%] m-auto">
-  //         <div className="font-serif lg:grid lg:grid-cols-4 lg:gap-3 ">
-  //           <section className="col-span-3">
-  //             <h1 className="text-xl">No results for {searchedWord}</h1>
-  //             <p>Try checking your spelling or use more general terms</p>
-  //           </section>
-
-  //           <section className="max-[767px]:my-4 col-span-1 md:my-8 lg:my-0">
-  //             <Information
-  //               recentGamesData={RecentlyAddedData}
-  //               platform="THIS PAGE CONTAINS ONLY PC GAMES"
-  //             />
-  //           </section>
-  //         </div>
-  //       </div>
-  //     </>
-  //   );
-  // }
+  const handlePageClick = (data) => {
+    setCurrentPage(data.selected);
+    window.scrollTo(0, 0);
+  };
 
   return (
     <Fragment>
       <ScrollToTop />
       <NavigationBar
-        onHandleInputInNav={(searchWord) => {
-          setSearchedWord(searchWord);
-        }}
         background="https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713647417/GAMERS%20RING/PC%20GAMES/DOWNLOAD%20IMAGES/GHOST_RECON_1_3_cxqjai.jpg"
         images={backgroundImages}
       />
       <div className="max-[767px]:w-[95%] md:w-[95%] m-auto">
-        <div className="font-serif lg:grid lg:grid-cols-4 lg:gap-3 ">
-          {pcGamesData.length === 0 ? (
-            <h1 className="text-center text-3xl text-red-600">Loading</h1>
-          ) : (
-            <section className="col-span-3">
-              <div className="grid max-[767px]:grid-cols-2 max-[767px]:gap-1 max-[767px]:gap-y-2 md:grid-cols-2 md:gap-2 md:gap-y-3 lg:grid-cols-3 transition-opacity duration-500">
-                {pcGamesData.map((pcGame) => (
-                  <GameComp
-                    key={pcGame._id}
-                    image={pcGame.image}
-                    title={pcGame.title}
-                    description={pcGame.description}
-                    category={pcGame.category}
-                  />
-                ))}
+        <div className="font-serif lg:grid lg:grid-cols-4 lg:gap-3">
+          <section className="col-span-3">
+            {pcGamesData.length === 0 ? (
+              <div className="flex justify-center items-center w-full">
+                <Lottie
+                  className="w-[6rem]"
+                  animationData={loadingAnimation}
+                  loop={true}
+                />
               </div>
-            </section>
-          )}
+            ) : (
+              <>
+                <div className="grid max-[767px]:grid-cols-2 max-[767px]:gap-1 max-[767px]:gap-y-2 md:grid-cols-2 md:gap-2 md:gap-y-3 lg:grid-cols-3 transition-opacity duration-500">
+                  {pcGamesData.map((pcGame) => (
+                    <GameComp
+                      key={pcGame._id}
+                      image={pcGame.image}
+                      image1={pcGame.image1}
+                      image2={pcGame.image2}
+                      image3={pcGame.image3}
+                      title={pcGame.title}
+                      description={pcGame.description}
+                      downloadDescription={pcGame.downloadDescription}
+                      minimumSystemRequirement={pcGame.minimumSystemRequirement}
+                      recommendedSystemRequirement={
+                        pcGame.recommendedSystemRequirement
+                      }
+                      category={pcGame.category}
+                    />
+                  ))}
+                </div>
+                <Pagination
+                  totalPages={totalPages}
+                  handlePageClick={handlePageClick}
+                />
+              </>
+            )}
+          </section>
           <section className="max-[767px]:my-4 col-span-1 md:my-8 lg:my-0">
             <Information
               recentGamesData={RecentlyAddedData}

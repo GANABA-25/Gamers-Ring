@@ -15,6 +15,7 @@ const GameComp = (props) => {
               state: { payload: props },
             })
           }
+          className="cursor-pointer"
         >
           {location.pathname === "/Downloads" ? (
             <>

@@ -171,9 +171,7 @@ const NavigationBar = ({ onHandleInputInNav, background, images }) => {
                   <FaYoutube className="border-2 rounded-sm p-[1px]" />
                   <FaLinkedin className="border-2 rounded-sm p-[1px]" />
                 </span>
-                <SearchInput
-                  onHandleInput={(searchWord) => onHandleInputInNav(searchWord)}
-                />
+                <SearchInput />
               </div>
 
               <ul className="md:flex md:gap-4 font-serif md:justify-end md:text-md">

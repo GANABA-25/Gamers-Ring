@@ -101,9 +101,7 @@ const Downloads = () => {
           </p>
 
           <button className="max-[767px]:my-4 max-[767px]:p-3 font-payback flex justify-center items-center gap-5 text-white bg-blue-600 hover:bg-blue-700 group hover:text-red-600 transition-all duration-300 md:p-4 md:my-4 lg:p-2">
-            <span className="text-white md:text-2xl lg:text-xl">
-              {payload.button}
-            </span>
+            <span className="text-white md:text-2xl lg:text-xl">Download</span>
             <span className="group-hover:text-red-600">
               <LuDownload className="max-[767px]:text-2xl md:text-3xl lg:text-2xl" />
             </span>
