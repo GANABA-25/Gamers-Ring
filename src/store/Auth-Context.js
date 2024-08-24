@@ -7,6 +7,7 @@ export const useUserContext = () => useContext(UserContext);
 export function UserProvider({ children }) {
   const [userData, setUserData] = useState([]);
   const [fetchedGames, setFetchedGames] = useState([]);
+  const [fetchedGamesErrorMessage, setFetchedGamesErrorMessage] = useState([]);
 
   return (
     <UserContext.Provider
@@ -15,6 +16,8 @@ export function UserProvider({ children }) {
         setUserData,
         fetchedGames,
         setFetchedGames,
+        fetchedGamesErrorMessage,
+        setFetchedGamesErrorMessage,
       }}
     >
       {children}

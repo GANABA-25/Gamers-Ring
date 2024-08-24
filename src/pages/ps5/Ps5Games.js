@@ -1,8 +1,12 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
+import axios from "axios";
+import Lottie from "lottie-react";
 
 import ScrollToTop from "../../components/ScrollToTop";
+import loadingAnimation from "../../lottie/Animation - loading.json";
+import GameComp from "../components/GameComp";
+import Pagination from "../../components/Pagination";
 import NavigationBar from "../../components/NavigationBar";
-import NextPage from "../../components/NextPage";
 import Information from "../../components/Information";
 import Footer from "../Footer";
 
@@ -316,59 +320,81 @@ const backgroundImages = [
 ];
 
 const Ps5Games = () => {
-  const [searchedWord, setSearchedWord] = useState("");
+  const [ps5GamesData, setPs5GamesData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
 
-  const filteredProducts = ps5GameData.filter((GameData) =>
-    GameData.title.toLowerCase().includes(searchedWord.toLowerCase())
-  );
+  const platform = "PlayStation 5";
+  const fetchPcGames = async (page) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8090/games/ps5Games/${platform}?page=${page}`
+      );
+      console.log(response);
+      const { totalPages, Ps5Games } = response.data;
 
-  const productsToDisplay = searchedWord.trim()
-    ? filteredProducts
-    : ps5GameData;
+      setTotalPages(totalPages);
+      setPs5GamesData(Ps5Games);
+    } catch (error) {
+      console.log("Error getting PcGames", error);
+    }
+  };
 
-  if (productsToDisplay.length === 0) {
-    return (
-      <>
-        <ScrollToTop />
-        <NavigationBar
-          onHandleInputInNav={(searchWord) => {
-            setSearchedWord(searchWord);
-          }}
-          background="https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713647417/GAMERS%20RING/PC%20GAMES/DOWNLOAD%20IMAGES/GHOST_RECON_1_3_cxqjai.jpg"
-          images={backgroundImages}
-        />
-        <div className="max-[767px]:w-[95%] md:w-[95%] m-auto">
-          <div className="font-serif lg:grid lg:grid-cols-4 lg:gap-3 ">
-            <section className="col-span-3">
-              <h1 className="text-xl">No results for {searchedWord}</h1>
-              <p>Try checking your spelling or use more general terms</p>
-            </section>
+  useEffect(() => {
+    fetchPcGames(currentPage + 1);
+  }, [currentPage]);
 
-            <section className="max-[767px]:my-4 col-span-1 md:my-8 lg:my-0">
-              <Information
-                recentGamesData={ps5RecentRelease}
-                platform="THIS PAGE CONTAINS ONLY PC GAMES"
-              />
-            </section>
-          </div>
-        </div>
-      </>
-    );
-  }
+  const handlePageClick = (data) => {
+    setCurrentPage(data.selected);
+    window.scrollTo(0, 0);
+  };
   return (
     <Fragment>
       <ScrollToTop />
       <NavigationBar
-        onHandleInputInNav={(searchWord) => {
-          setSearchedWord(searchWord);
-        }}
         background="https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713647417/GAMERS%20RING/PC%20GAMES/DOWNLOAD%20IMAGES/GHOST_RECON_1_3_cxqjai.jpg"
         images={backgroundImages}
       />
       <div className="max-[767px]:w-[95%] md:w-[95%] m-auto">
         <div className="font-serif lg:grid lg:grid-cols-4 lg:gap-3 ">
           <section className="col-span-3">
-            <NextPage data={productsToDisplay} itemsPerPage="9" />
+            {ps5GamesData.length === 0 ? (
+              <div className="flex justify-center items-center w-full">
+                <Lottie
+                  className="w-[6rem]"
+                  animationData={loadingAnimation}
+                  loop={true}
+                />
+              </div>
+            ) : (
+              <>
+                <div className="grid max-[767px]:grid-cols-2 max-[767px]:gap-1 max-[767px]:gap-y-2 md:grid-cols-2 md:gap-2 md:gap-y-3 lg:grid-cols-3 transition-opacity duration-500">
+                  {ps5GamesData.map((ps4Game) => (
+                    <GameComp
+                      key={ps4Game._id}
+                      image={ps4Game.image}
+                      image1={ps4Game.image1}
+                      image2={ps4Game.image2}
+                      image3={ps4Game.image3}
+                      title={ps4Game.title}
+                      description={ps4Game.description}
+                      downloadDescription={ps4Game.downloadDescription}
+                      minimumSystemRequirement={
+                        ps4Game.minimumSystemRequirement
+                      }
+                      recommendedSystemRequirement={
+                        ps4Game.recommendedSystemRequirement
+                      }
+                      platform={ps4Game.platform}
+                    />
+                  ))}
+                </div>
+                <Pagination
+                  totalPages={totalPages}
+                  handlePageClick={handlePageClick}
+                />
+              </>
+            )}
           </section>
           <section className="max-[767px]:my-4 col-span-1 md:my-8 lg:my-0">
             <Information

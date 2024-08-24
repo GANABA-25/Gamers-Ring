@@ -1,28 +1,24 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../store/Auth-Context";
+import Lottie from "lottie-react";
 import axios from "axios";
+
+import normalLoading from "../lottie/Animation - normalLoading.json";
 
 const SearchInput = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(false);
-  const isMounted = useRef(true);
 
-  const { setFetchedGames } = useUserContext();
+  const { setFetchedGames, setFetchedGamesErrorMessage } = useUserContext();
   const navigate = useNavigate();
 
   useEffect(() => {
-    isMounted.current = true;
-
     if (loading) {
       document.title = "Loading...";
     } else {
       document.title = "Gamers Ring";
     }
-
-    return () => {
-      isMounted.current = false;
-    };
   }, [loading]);
 
   const searchInputHandler = async (e) => {
@@ -40,7 +36,13 @@ const SearchInput = () => {
         navigate("/SearchResultPage");
       }
     } catch (error) {
-      console.error("Error fetching search results", error);
+      if (error.response && error.response.status === 404) {
+        const errorMessage = error.response.data;
+        setFetchedGamesErrorMessage(errorMessage);
+        navigate("/SearchResultPage");
+      } else {
+        console.error("An unexpected error occurred:", error);
+      }
     } finally {
       setLoading(false);
     }

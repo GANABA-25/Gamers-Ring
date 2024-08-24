@@ -464,16 +464,15 @@ const backgroundImages = [
 ];
 
 const HomePage = () => {
-  const [searchedWord, setSearchedWord] = useState("");
   const [pcGamesData, setPcGamesData] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
 
-  const category = "pcGame";
+  const platform = "Pc";
   const fetchPcGames = async (page) => {
     try {
       const response = await axios.get(
-        `http://localhost:8090/games/PcGames/${category}?page=${page}`
+        `http://localhost:8090/games/PcGames/${platform}?page=${page}`
       );
 
       const { totalPages, pcGames } = response.data;
@@ -528,7 +527,7 @@ const HomePage = () => {
                       recommendedSystemRequirement={
                         pcGame.recommendedSystemRequirement
                       }
-                      category={pcGame.category}
+                      platform={pcGame.platform}
                     />
                   ))}
                 </div>

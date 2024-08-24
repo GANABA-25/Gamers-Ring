@@ -1,4 +1,6 @@
 import { Fragment, useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import { Link, useLocation } from "react-router-dom";
 
 import { FaBars } from "react-icons/fa6";
@@ -24,6 +26,7 @@ const NavigationBar = ({ onHandleInputInNav, background, images }) => {
   const [isShown, setIsShown] = useState(false);
   let sliderRef = useRef(null);
 
+  const navigate = useNavigate();
   const location = useLocation();
   const [pcPage, setPcPage] = useState("text-white");
   const [ps3Page, setPs3Page] = useState("text-white");
@@ -324,7 +327,7 @@ const NavigationBar = ({ onHandleInputInNav, background, images }) => {
                 <li
                   className={`transition-all duration-300 hover:underline hover:underline-offset-4 ${pcPage}`}
                 >
-                  <Link to="/">Pc Games</Link>
+                  <Link>Pc Games</Link>
                 </li>
                 <li
                   className={`transition-all duration-300 hover:underline hover:underline-offset-4 ${ps3Page}`}

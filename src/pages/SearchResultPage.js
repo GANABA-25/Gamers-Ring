@@ -6,7 +6,6 @@ import NavigationBar from "../components/NavigationBar";
 import Information from "../components/Information";
 import GameComp from "./components/GameComp";
 import ScrollToTop from "../components/ScrollToTop";
-import loadingAnimation from "../lottie/Animation - loading.json";
 import Footer from "./Footer";
 
 const backgroundImages = [
@@ -49,9 +48,8 @@ const RecentlyAddedData = [
 ];
 
 const SearchResultPage = () => {
-  const { fetchedGames } = useUserContext();
+  const { fetchedGames, fetchedGamesErrorMessage } = useUserContext();
 
-  console.log("SearchedGames", fetchedGames);
   return (
     <Fragment>
       <ScrollToTop />
@@ -63,12 +61,17 @@ const SearchResultPage = () => {
         <div className="font-serif lg:grid lg:grid-cols-4 lg:gap-3">
           <section className="col-span-3">
             {fetchedGames.length === 0 ? (
-              <div className="flex justify-center items-center w-full">
-                <Lottie
-                  className="w-[6rem]"
-                  animationData={loadingAnimation}
-                  loop={true}
-                />
+              <div className="grid gap-4 justify-center items-center">
+                <div className="flex gap-3">
+                  <h1>{fetchedGamesErrorMessage.message}</h1>
+                  <h1 className="text-red-600">
+                    {fetchedGamesErrorMessage.searchedTerm}
+                  </h1>
+                </div>
+
+                <div className="grid gap-4 justify-center items-center w-full">
+                  <h1 className="border-2 text-center p-4">No Results</h1>
+                </div>
               </div>
             ) : (
               <>
