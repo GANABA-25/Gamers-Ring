@@ -99,6 +99,7 @@ const Ps3Games = () => {
                   {ps3GamesData.map((ps3Game) => (
                     <GameComp
                       key={ps3Game._id}
+                      gameId={ps3Game._id}
                       image={ps3Game.image}
                       image1={ps3Game.image1}
                       image2={ps3Game.image2}

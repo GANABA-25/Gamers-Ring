@@ -1,6 +1,4 @@
 import { Fragment, useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { Link, useLocation } from "react-router-dom";
 
 import { FaBars } from "react-icons/fa6";
@@ -137,7 +135,7 @@ const NavigationBar = ({ onHandleInputInNav, background, images }) => {
       </nav>
 
       {location.pathname === "/Downloads" ? (
-        <section className="bg-blue-700 max-[767px]:p-2 fixed top-0 left-0 w-full md:p-4 lg:p-4">
+        <section className="bg-blue-700 max-[767px]:p-2 fixed top-0 left-0 w-full md:p-4 lg:p-4 z-50">
           <div className="text-white inset-0">
             <div className="max-[767px]:mt-3 flex justify-between lg:hidden ">
               <span className="flex justify-end gap-1 text-xl md:text-3xl md:gap-3">

@@ -1,5 +1,4 @@
 import { Fragment } from "react";
-import Lottie from "lottie-react";
 import { useUserContext } from "../store/Auth-Context";
 
 import NavigationBar from "../components/NavigationBar";
@@ -79,6 +78,7 @@ const SearchResultPage = () => {
                   {fetchedGames.map((game) => (
                     <GameComp
                       key={game._id}
+                      gameId={game._id}
                       image={game.image}
                       image1={game.image1}
                       image2={game.image2}

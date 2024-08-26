@@ -57,7 +57,6 @@ const Ps4Games = () => {
       const response = await axios.get(
         `http://localhost:8090/games/ps4Games/${platform}?page=${page}`
       );
-      console.log(response);
       const { totalPages, Ps4Games } = response.data;
 
       setTotalPages(totalPages);
@@ -99,6 +98,7 @@ const Ps4Games = () => {
                   {ps4GamesData.map((ps4Game) => (
                     <GameComp
                       key={ps4Game._id}
+                      gameId={ps4Game._id}
                       image={ps4Game.image}
                       image1={ps4Game.image1}
                       image2={ps4Game.image2}

@@ -1,7 +1,6 @@
 import { Fragment, useState, useEffect } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
-import { useUserContext } from "../../store/Auth-Context";
 
 import NavigationBar from "../../components/NavigationBar";
 import ScrollToTop from "../../components/ScrollToTop";
@@ -50,9 +49,7 @@ const Downloads = () => {
 
   useEffect(() => {
     fetchGameComments();
-  }, [payload]);
-
-  console.log(fetchedComments);
+  });
 
   return (
     <Fragment>
@@ -113,8 +110,13 @@ const Downloads = () => {
           <h1 className="max-[767px]:text-3xl max-[767px]:my-2 font-payback underline underline-offset-4 md:text-5xl md:my-4 lg:text-3xl">
             NOTE
           </h1>
-          <p className="md:text-xl tracking-wider lg:text-sm">
-            {payload.version}
+          <p className="md:text-xl tracking-wider lg:text-sm break-all">
+            Kindly be aware that this is the {payload.platform} version of the
+            game,
+            <br className="hidden lg:block" /> exclusively tailored to provide
+            an optimized experience for
+            <br className="hidden lg:block" />
+            the unique features and capabilities of this platform.
           </p>
 
           <button className="max-[767px]:my-4 max-[767px]:p-3 font-payback flex justify-center items-center gap-5 text-white bg-blue-600 hover:bg-blue-700 group hover:text-red-600 transition-all duration-300 md:p-4 md:my-4 lg:p-2">
