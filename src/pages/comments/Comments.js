@@ -1,65 +1,52 @@
 import { useState, useEffect } from "react";
 import { useUserContext } from "../../store/Auth-Context";
+import axios from "axios";
 
 import { BsFillSendArrowDownFill } from "react-icons/bs";
 
-const Comments = ({ id }) => {
-  const { userData, setUserData } = useUserContext();
-  const [comments, setComments] = useState(userData[id] || []);
-  const [formData, setFormData] = useState({
-    UserComment: "",
-    UserName: "",
-    UserEmail: "",
+const Comments = ({ gameId, refreshComments }) => {
+  const [userComment, setUserComment] = useState({
+    comment: "",
+    userName: "",
+    userEmail: "",
   });
 
-  useEffect(() => {
-    setComments(userData[id] || []);
-  }, [userData, id]);
-
-  const formatDate = (date) => {
-    return date.toLocaleString("en-US", {
-      weekday: "short",
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-      hour: "numeric",
-      minute: "numeric",
-      second: "numeric",
-    });
-  };
-
   const textAreaHandler = (e) => {
-    setFormData((prevState) => {
-      return { ...prevState, UserComment: e.target.value };
+    setUserComment((prevState) => {
+      return { ...prevState, comment: e.target.value };
     });
   };
 
   const nameHandler = (e) => {
-    setFormData((prevState) => {
-      return { ...prevState, UserName: e.target.value };
+    setUserComment((prevState) => {
+      return { ...prevState, userName: e.target.value };
     });
   };
 
   const emailHandler = (e) => {
-    setFormData((prevState) => {
-      return { ...prevState, UserEmail: e.target.value };
+    setUserComment((prevState) => {
+      return { ...prevState, userEmail: e.target.value };
     });
   };
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
 
-    const newComment = { date: formatDate(new Date()), ...formData };
-    const newComments = [...comments, newComment];
-    const updatedUserData = { ...userData, [id]: newComments };
+    try {
+      const response = await axios.post(
+        `http://localhost:8090/user/comment/${gameId}`,
+        userComment
+      );
 
-    setComments(newComments);
-    setUserData(updatedUserData);
+      if (refreshComments) refreshComments();
+    } catch (error) {
+      console.log("error posting comment", error);
+    }
 
-    setFormData({
-      UserComment: "",
-      UserName: "",
-      UserEmail: "",
+    setUserComment({
+      comment: "",
+      userName: "",
+      userEmail: "",
     });
   };
 
@@ -75,7 +62,7 @@ const Comments = ({ id }) => {
               className="max-[767px]:w-[18rem] border border-blue-600 outline-blue-700 p-2 md:w-[20rem]"
               placeholder="Please leave your comment"
               onChange={textAreaHandler}
-              value={formData.UserComment}
+              value={userComment.comment}
               required
             />
           </div>
@@ -85,7 +72,7 @@ const Comments = ({ id }) => {
               type="text"
               placeholder="Name: *"
               onChange={nameHandler}
-              value={formData.UserName}
+              value={userComment.userName}
               required
             />
             <input
@@ -93,7 +80,7 @@ const Comments = ({ id }) => {
               type="email"
               placeholder="Email: *"
               onChange={emailHandler}
-              value={formData.UserEmail}
+              value={userComment.userEmail}
               required
             />
           </div>

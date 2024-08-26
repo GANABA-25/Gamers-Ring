@@ -26,7 +26,6 @@ const NavigationBar = ({ onHandleInputInNav, background, images }) => {
   const [isShown, setIsShown] = useState(false);
   let sliderRef = useRef(null);
 
-  const navigate = useNavigate();
   const location = useLocation();
   const [pcPage, setPcPage] = useState("text-white");
   const [ps3Page, setPs3Page] = useState("text-white");
@@ -327,7 +326,7 @@ const NavigationBar = ({ onHandleInputInNav, background, images }) => {
                 <li
                   className={`transition-all duration-300 hover:underline hover:underline-offset-4 ${pcPage}`}
                 >
-                  <Link>Pc Games</Link>
+                  <Link to="/">Pc Games</Link>
                 </li>
                 <li
                   className={`transition-all duration-300 hover:underline hover:underline-offset-4 ${ps3Page}`}

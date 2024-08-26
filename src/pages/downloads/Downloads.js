@@ -1,8 +1,11 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
+import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { useUserContext } from "../../store/Auth-Context";
+
 import NavigationBar from "../../components/NavigationBar";
 import ScrollToTop from "../../components/ScrollToTop";
+import CommentsList from "../../components/CommentsList";
 import Comments from "../comments/Comments";
 import Footer from "../Footer";
 
@@ -21,27 +24,41 @@ function StringSplitter({ text, delimiter }) {
 }
 
 const Downloads = () => {
-  const [searchedWord, setSearchedWord] = useState("");
+  const [fetchedComments, setFetchedComments] = useState([]);
   const { state } = useLocation();
   const payload = state?.payload || {};
-  const { userData } = useUserContext();
-
-  const id = payload.id;
 
   const myString = payload.minimumSystemRequirement;
   const myString2 = payload.recommendedSystemRequirement;
   const myString4 = payload.downloadDescription;
   const delimiter = ",";
 
+  const fetchGameComments = async () => {
+    if (!payload || !payload.gameId) return;
+    const gameId = payload.gameId;
+
+    try {
+      const response = await axios.get(
+        `http://localhost:8090/user/gameComments/${gameId}`
+      );
+
+      setFetchedComments(response.data.comments);
+    } catch (error) {
+      console.log("Error fetching comments ", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchGameComments();
+  }, [payload]);
+
+  console.log(fetchedComments);
+
   return (
     <Fragment>
       <ScrollToTop />
       <div className="max-[767px]:mb-[6.7rem] md:mb-[8.7rem] lg:my-[4.3rem]">
-        <NavigationBar
-          onHandleInputInNav={(searchWord) => {
-            setSearchedWord(searchWord);
-          }}
-        />
+        <NavigationBar />
       </div>
 
       <div className="max-[767px]:w-[95%] md:w-[95%] m-auto mt-0.5">
@@ -110,12 +127,12 @@ const Downloads = () => {
 
         <section>
           <section className="max-[767px]:my-8 md:my-10">
-            {userData[id] && userData[id].length > 0 && (
+            {fetchedComments.length > 0 && (
               <div className="my-4">
                 <div className="my-4">
                   <div className="flex ">
                     <p className="max-[767px]:text-xl text-white bg-blue-600 p-3 font-serif md:text-2xl lg:text-xl">
-                      {userData[id].length}
+                      {fetchedComments.length}
                     </p>
                     <h1 className="font-payback tracking-widest bg-black text-white flex items-center gap-2 max-[767px]:w-[9rem] max-[767px]:p-1 md:w-[14rem] md:p-4 md:text-2xl lg:text-xl lg:w-[12rem] lg:p-3">
                       COMMENTS
@@ -124,22 +141,13 @@ const Downloads = () => {
 
                   <hr className="bg-black h-0.5" />
                 </div>
-                {userData[id].map((comment, index) => (
-                  <div
-                    key={index}
-                    className="mb-4 max-[767px]:text-[1rem] md:text-2xl lg:text-xl"
-                  >
-                    <div className="flex items-center max-[767px]:gap-2 md:gap-3 lg:gap-4">
-                      <h1 className="font-serif font-bold">
-                        {comment.UserName}
-                      </h1>
-                      <p className="opacity-80 max-[767px]:text-[0.9rem]">
-                        {comment.date.toLocaleString()}
-                      </p>
-                    </div>
-                    <p className="">{comment.UserComment}</p>
-                    <p className="my-2 opacity-80 lg:text-sm">Reply</p>
-                  </div>
+                {fetchedComments.map((comments) => (
+                  <CommentsList
+                    key={comments._id}
+                    userName={comments.userName}
+                    createdAt={comments.createdAt}
+                    comment={comments.comment}
+                  />
                 ))}
               </div>
             )}
@@ -147,7 +155,10 @@ const Downloads = () => {
         </section>
 
         <section>
-          <Comments id={id} />
+          <Comments
+            gameId={payload.gameId}
+            refreshComments={fetchGameComments}
+          />
         </section>
       </div>
       <Footer />
