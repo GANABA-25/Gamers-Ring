@@ -1,4 +1,6 @@
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
+import axios from "axios";
+import { useLocation } from "react-router-dom";
 import { useUserContext } from "../store/Auth-Context";
 
 import NavigationBar from "../components/NavigationBar";
@@ -47,7 +49,37 @@ const RecentlyAddedData = [
 ];
 
 const SearchResultPage = () => {
-  const { fetchedGames, fetchedGamesErrorMessage } = useUserContext();
+  const [fetchedGames, setFetchedGames] = useState([]);
+  const [fetchedGamesErrorMessage, setFetchedGamesErrorMessage] = useState("");
+  const { search } = useLocation();
+  const searchParams = new URLSearchParams(search);
+  const searchTerm = searchParams.get("searchTerm");
+
+  useEffect(() => {
+    const fetchSearchedGames = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8090/games/searchedGames/?searchedTerm=${searchTerm}&page=1`
+        );
+
+        if (response.status === 200) {
+          const { searchedGames } = response.data;
+          setFetchedGames(searchedGames);
+        }
+      } catch (error) {
+        if (error.response && error.response.status === 404) {
+          const errorMessage = error.response.data;
+          setFetchedGamesErrorMessage(errorMessage);
+        } else {
+          console.error("An unexpected error occurred:", error);
+        }
+      }
+    };
+
+    if (searchTerm) {
+      fetchSearchedGames();
+    }
+  }, [searchTerm]);
 
   return (
     <Fragment>

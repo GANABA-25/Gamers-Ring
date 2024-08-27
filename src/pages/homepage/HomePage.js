@@ -1,6 +1,8 @@
-import { Fragment, useState, useEffect } from "react";
-import axios from "axios";
+import { Fragment } from "react";
+
 import Lottie from "lottie-react";
+import { fetchPcGames } from "../../http";
+import { useFetch } from "../../hooks/useFetch";
 
 import ScrollToTop from "../../components/ScrollToTop";
 import NavigationBar from "../../components/NavigationBar";
@@ -50,28 +52,8 @@ const backgroundImages = [
 ];
 
 const HomePage = () => {
-  const [pcGamesData, setPcGamesData] = useState([]);
-  const [currentPage, setCurrentPage] = useState(0);
-  const [totalPages, setTotalPages] = useState(0);
-
-  const platform = "Pc";
-  const fetchPcGames = async (page) => {
-    try {
-      const response = await axios.get(
-        `http://localhost:8090/games/PcGames/${platform}?page=${page}`
-      );
-
-      const { totalPages, pcGames } = response.data;
-      setTotalPages(totalPages);
-      setPcGamesData(pcGames);
-    } catch (error) {
-      console.log("Error getting PcGames", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchPcGames(currentPage + 1);
-  }, [currentPage]);
+  const { isLoading, fetchedData, setCurrentPage, totalPages } =
+    useFetch(fetchPcGames);
 
   const handlePageClick = (data) => {
     setCurrentPage(data.selected);
@@ -88,7 +70,7 @@ const HomePage = () => {
       <div className="max-[767px]:w-[95%] md:w-[95%] m-auto">
         <div className="font-serif lg:grid lg:grid-cols-4 lg:gap-3">
           <section className="col-span-3">
-            {pcGamesData.length === 0 ? (
+            {isLoading ? (
               <div className="flex justify-center items-center w-full">
                 <Lottie
                   className="w-[6rem]"
@@ -99,7 +81,7 @@ const HomePage = () => {
             ) : (
               <>
                 <div className="grid max-[767px]:grid-cols-2 max-[767px]:gap-1 max-[767px]:gap-y-2 md:grid-cols-2 md:gap-2 md:gap-y-3 lg:grid-cols-3 transition-opacity duration-500">
-                  {pcGamesData.map((pcGame) => (
+                  {fetchedData.map((pcGame) => (
                     <GameComp
                       key={pcGame._id}
                       gameId={pcGame._id}

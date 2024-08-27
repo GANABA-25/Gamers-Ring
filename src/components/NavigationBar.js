@@ -1,5 +1,6 @@
 import { Fragment, useState, useEffect, useRef } from "react";
-import { Link, useLocation } from "react-router-dom";
+import axios from "axios";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { FaBars } from "react-icons/fa6";
 import { PiInstagramLogoFill } from "react-icons/pi";
@@ -19,17 +20,20 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 
-const NavigationBar = ({ onHandleInputInNav, background, images }) => {
+const NavigationBar = ({ background, images }) => {
+  const [pcGamesData, setPcGamesData] = useState([]);
+  const [totalPages, setTotalPages] = useState(0);
+
   const [isOpen, setIsOpen] = useState(false);
   const [isShown, setIsShown] = useState(false);
   let sliderRef = useRef(null);
 
+  const navigate = useNavigate();
   const location = useLocation();
   const [pcPage, setPcPage] = useState("text-white");
   const [ps3Page, setPs3Page] = useState("text-white");
   const [ps4Page, setPs4Page] = useState("text-white");
   const [ps5Page, setPs5Page] = useState("text-white");
-  // const [contactPage, setContactPageColor] = useState("text-white");
 
   const toggleOffcanvas = () => {
     setIsOpen(!isOpen);
@@ -79,6 +83,25 @@ const NavigationBar = ({ onHandleInputInNav, background, images }) => {
       ? setPs5Page("underline underline-offset-4 decoration-blue-600")
       : setPs5Page("");
   }, [location.pathname]);
+
+  const platform = "Pc";
+  const fetchPcGames = async (page) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8090/games/PcGames/${platform}?page=${page}`
+      );
+
+      const { totalPages, pcGames } = response.data;
+      setTotalPages(totalPages);
+      setPcGamesData(pcGames);
+
+      if (response) {
+        navigate("/");
+      }
+    } catch (error) {
+      console.log("Error getting PcGames", error);
+    }
+  };
 
   return (
     <Fragment>
@@ -199,9 +222,7 @@ const NavigationBar = ({ onHandleInputInNav, background, images }) => {
             </div>
           </div>
           <div className="max-[767px]:my-2 md:mt-4 lg:hidden">
-            <SearchInput
-              onHandleInput={(searchWord) => onHandleInputInNav(searchWord)}
-            />
+            <SearchInput />
           </div>
         </section>
       ) : (
@@ -315,16 +336,14 @@ const NavigationBar = ({ onHandleInputInNav, background, images }) => {
                   <FaYoutube className="border-2 rounded-sm p-[1px]" />
                   <FaLinkedin className="border-2 rounded-sm p-[1px]" />
                 </span>
-                <SearchInput
-                  onHandleInput={(searchWord) => onHandleInputInNav(searchWord)}
-                />
+                <SearchInput />
               </div>
 
               <ul className="md:flex md:items-center md:gap-4 font-serif md:justify-end md:text-md">
                 <li
                   className={`transition-all duration-300 hover:underline hover:underline-offset-4 ${pcPage}`}
                 >
-                  <Link to="/">Pc Games</Link>
+                  <Link onClick={fetchPcGames}>Pc Games</Link>
                 </li>
                 <li
                   className={`transition-all duration-300 hover:underline hover:underline-offset-4 ${ps3Page}`}
@@ -348,9 +367,7 @@ const NavigationBar = ({ onHandleInputInNav, background, images }) => {
       )}
       {isShown && (
         <div className="lg:hidden bg-blue-600 max-[767px]:py-1 my-1 max-[767px]:px-2 max-[767px]:mb-1 md:mb-2 md:p-2">
-          <SearchInput
-            onHandleInput={(searchWord) => onHandleInputInNav(searchWord)}
-          />
+          <SearchInput />
         </div>
       )}
     </Fragment>

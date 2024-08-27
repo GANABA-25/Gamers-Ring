@@ -1,6 +1,7 @@
-import { Fragment, useState, useEffect } from "react";
-import axios from "axios";
+import { Fragment } from "react";
 import Lottie from "lottie-react";
+import { fetchPs3Games } from "../../http";
+import { useFetch } from "../../hooks/useFetch";
 
 import ScrollToTop from "../../components/ScrollToTop";
 import NavigationBar from "../../components/NavigationBar";
@@ -47,28 +48,8 @@ const backgroundImages = [
 ];
 
 const Ps3Games = () => {
-  const [ps3GamesData, setPs3GamesData] = useState([]);
-  const [currentPage, setCurrentPage] = useState(0);
-  const [totalPages, setTotalPages] = useState(0);
-
-  const platform = "PlayStation 3";
-  const fetchPcGames = async (page) => {
-    try {
-      const response = await axios.get(
-        `http://localhost:8090/games/ps3Games/${platform}?page=${page}`
-      );
-
-      const { totalPages, Ps3Games } = response.data;
-      setTotalPages(totalPages);
-      setPs3GamesData(Ps3Games);
-    } catch (error) {
-      console.log("Error getting PcGames", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchPcGames(currentPage + 1);
-  }, [currentPage]);
+  const { isLoading, fetchedData, setCurrentPage, totalPages } =
+    useFetch(fetchPs3Games);
 
   const handlePageClick = (data) => {
     setCurrentPage(data.selected);
@@ -85,7 +66,7 @@ const Ps3Games = () => {
       <div className="max-[767px]:w-[95%] md:w-[95%] m-auto">
         <div className="font-serif lg:grid lg:grid-cols-4 lg:gap-3 ">
           <section className="col-span-3">
-            {ps3GamesData.length === 0 ? (
+            {isLoading ? (
               <div className="flex justify-center items-center w-full">
                 <Lottie
                   className="w-[6rem]"
@@ -96,7 +77,7 @@ const Ps3Games = () => {
             ) : (
               <>
                 <div className="grid max-[767px]:grid-cols-2 max-[767px]:gap-1 max-[767px]:gap-y-2 md:grid-cols-2 md:gap-2 md:gap-y-3 lg:grid-cols-3 transition-opacity duration-500">
-                  {ps3GamesData.map((ps3Game) => (
+                  {fetchedData.map((ps3Game) => (
                     <GameComp
                       key={ps3Game._id}
                       gameId={ps3Game._id}

@@ -1,51 +1,35 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../store/Auth-Context";
-import Lottie from "lottie-react";
 import axios from "axios";
-
-import normalLoading from "../lottie/Animation - normalLoading.json";
 
 const SearchInput = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [loading, setLoading] = useState(false);
-
   const { setFetchedGames, setFetchedGamesErrorMessage } = useUserContext();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (loading) {
-      document.title = "Loading...";
-    } else {
-      document.title = "Gamers Ring";
-    }
-  }, [loading]);
-
   const searchInputHandler = async (e) => {
     e.preventDefault();
+    navigate(`/SearchResultPage?searchTerm=${searchTerm}`);
 
-    setLoading(true);
-
-    try {
-      const response = await axios.get(
-        `http://localhost:8090/games/searchedGames/?searchedTerm=${searchTerm}&page=1`
-      );
-      const { searchedGames, totalPages } = response.data;
-      if (response.status === 200) {
-        setFetchedGames(searchedGames);
-        navigate("/SearchResultPage");
-      }
-    } catch (error) {
-      if (error.response && error.response.status === 404) {
-        const errorMessage = error.response.data;
-        setFetchedGamesErrorMessage(errorMessage);
-        navigate("/SearchResultPage");
-      } else {
-        console.error("An unexpected error occurred:", error);
-      }
-    } finally {
-      setLoading(false);
-    }
+    // try {
+    //   const response = await axios.get(
+    //     `http://localhost:8090/games/searchedGames/?searchedTerm=${searchTerm}&page=1`
+    //   );
+    //   const { searchedGames } = response.data;
+    //   if (response.status === 200) {
+    //     setFetchedGames(searchedGames);
+    //     navigate(`/SearchResultPage?searchTerm=${searchTerm}`);
+    //   }
+    // } catch (error) {
+    //   if (error.response && error.response.status === 404) {
+    //     const errorMessage = error.response.data;
+    //     setFetchedGamesErrorMessage(errorMessage);
+    //     // navigate("/SearchResultPage?searchTerm=${searchTerm}");
+    //   } else {
+    //     console.error("An unexpected error occurred:", error);
+    //   }
+    // }
   };
 
   return (
