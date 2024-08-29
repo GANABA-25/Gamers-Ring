@@ -9,6 +9,8 @@ export function UserProvider({ children }) {
   const [fetchedGames, setFetchedGames] = useState([]);
   const [fetchedGamesErrorMessage, setFetchedGamesErrorMessage] = useState([]);
 
+  const [commentedUserName, setCommentedUserName] = useState([]);
+
   return (
     <UserContext.Provider
       value={{
@@ -18,6 +20,8 @@ export function UserProvider({ children }) {
         setFetchedGames,
         fetchedGamesErrorMessage,
         setFetchedGamesErrorMessage,
+        commentedUserName,
+        setCommentedUserName,
       }}
     >
       {children}

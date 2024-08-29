@@ -4,41 +4,46 @@ import axios from "axios";
 
 import NormalLoadingAnimation from "../../lottie/Animation - form loading.json";
 
+import { useUserContext } from "../../store/Auth-Context";
 import { BsFillSendArrowDownFill } from "react-icons/bs";
 
-const Comments = ({ gameId, refreshComments }) => {
+const Reply = ({ setShowReplyInput, refreshComments }) => {
+  const { commentedUserName } = useUserContext();
+  const { commentUserName, id } = commentedUserName;
   const [isLoading, setIsLoading] = useState(false);
-  const [userComment, setUserComment] = useState({
-    comment: "",
-    userName: "",
-    userEmail: "",
+
+  const [replyComment, setReplyComment] = useState({
+    replyMessage: "",
+    replyUserName: "",
+    replyUserEmail: "",
   });
 
   const textAreaHandler = (e) => {
-    setUserComment((prevState) => {
-      return { ...prevState, comment: e.target.value };
+    setReplyComment((prevState) => {
+      return { ...prevState, replyMessage: e.target.value };
     });
   };
 
   const nameHandler = (e) => {
-    setUserComment((prevState) => {
-      return { ...prevState, userName: e.target.value };
+    setReplyComment((prevState) => {
+      return { ...prevState, replyUserName: e.target.value };
     });
   };
 
   const emailHandler = (e) => {
-    setUserComment((prevState) => {
-      return { ...prevState, userEmail: e.target.value };
+    setReplyComment((prevState) => {
+      return { ...prevState, replyUserEmail: e.target.value };
     });
   };
 
   const submitHandler = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+
     try {
       const response = await axios.post(
-        `http://localhost:8090/user/comment/${gameId}`,
-        userComment
+        `http://localhost:8090/user/replyComment/${id}`,
+        replyComment
       );
 
       if (refreshComments) refreshComments();
@@ -48,26 +53,38 @@ const Comments = ({ gameId, refreshComments }) => {
       setIsLoading(false);
     }
 
-    setUserComment({
-      comment: "",
-      userName: "",
-      userEmail: "",
+    setReplyComment({
+      replyMessage: "",
+      replyUserName: "",
+      replyUserEmail: "",
     });
   };
 
+  const cancelReplyHandler = () => {
+    setShowReplyInput(false);
+  };
   return (
     <>
       <div className="my-10">
         <form onSubmit={submitHandler}>
           <div className="grid gap-2">
-            <labe className="max-[767px]:text-2xl font-payback md:text-4xl lg:text-2xl">
-              Leave Comments
-            </labe>
+            <div className="flex items-center gap-2 font-serif">
+              <labe className="max-[767px]:text-2xl md:text-4xl lg:text-2xl">
+                Reply to {commentUserName}
+              </labe>
+              <h1
+                className="cursor-pointer lg:hover:text-blue-600 capitalize"
+                onClick={cancelReplyHandler}
+              >
+                cancel reply
+              </h1>
+            </div>
+
             <textarea
               className="max-[767px]:w-[18rem] border border-blue-600 outline-blue-700 p-2 md:w-[20rem]"
-              placeholder="Please leave your comment"
+              placeholder="Please leave your Message"
               onChange={textAreaHandler}
-              value={userComment.comment}
+              value={replyComment.replyMessage}
               required
             />
           </div>
@@ -77,7 +94,7 @@ const Comments = ({ gameId, refreshComments }) => {
               type="text"
               placeholder="Name: *"
               onChange={nameHandler}
-              value={userComment.userName}
+              value={replyComment.replyUserName}
               required
             />
             <input
@@ -85,12 +102,12 @@ const Comments = ({ gameId, refreshComments }) => {
               type="email"
               placeholder="Email: *"
               onChange={emailHandler}
-              value={userComment.userEmail}
+              value={replyComment.replyUserEmail}
               required
             />
           </div>
           <button className="max-[767px]:w-[12rem] max-[767px]:text-xl max-[767px]:p-2 font-serif bg-blue-600 hover:bg-blue-700 text-white flex items-center gap-2 md:w-[14rem md text-3xl md:p-4 lg:text-xl lg:p-3">
-            Post Comment
+            Reply Message
             {isLoading ? (
               <Lottie
                 className="max-[767px]:w-[2.33rem] md:w-[4rem] lg:w-[3rem]"
@@ -107,4 +124,4 @@ const Comments = ({ gameId, refreshComments }) => {
   );
 };
 
-export default Comments;
+export default Reply;

@@ -1,14 +1,20 @@
 import { Fragment, useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
 
 import NavigationBar from "../../components/NavigationBar";
 import ScrollToTop from "../../components/ScrollToTop";
 import CommentsList from "../../components/CommentsList";
 import Comments from "../comments/Comments";
+import Reply from "../comments/Reply";
+import Modal from "../../components/modal/modal";
 import Footer from "../Footer";
 
 import { LuDownload } from "react-icons/lu";
+import { FaLinkedin } from "react-icons/fa6";
+import { FaGithub } from "react-icons/fa";
+import { SiGmail } from "react-icons/si";
+import { IoCloseSharp } from "react-icons/io5";
 
 function StringSplitter({ text, delimiter }) {
   const parts = text.split(delimiter);
@@ -23,7 +29,9 @@ function StringSplitter({ text, delimiter }) {
 }
 
 const Downloads = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [fetchedComments, setFetchedComments] = useState([]);
+  const [showReplyInput, setShowReplyInput] = useState(false);
   const { state } = useLocation();
   const payload = state?.payload || {};
 
@@ -40,7 +48,7 @@ const Downloads = () => {
       const response = await axios.get(
         `http://localhost:8090/user/gameComments/${gameId}`
       );
-
+      console.log(response);
       setFetchedComments(response.data.comments);
     } catch (error) {
       console.log("Error fetching comments ", error);
@@ -49,7 +57,15 @@ const Downloads = () => {
 
   useEffect(() => {
     fetchGameComments();
-  });
+  }, []);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <Fragment>
@@ -119,7 +135,60 @@ const Downloads = () => {
             the unique features and capabilities of this platform.
           </p>
 
-          <button className="max-[767px]:my-4 max-[767px]:p-3 font-payback flex justify-center items-center gap-5 text-white bg-blue-600 hover:bg-blue-700 group hover:text-red-600 transition-all duration-300 md:p-4 md:my-4 lg:p-2">
+          <Modal isOpen={isModalOpen} onClose={closeModal}>
+            <div className="font-serif max-[767px]:p-4 md:p-8 grid gap-4">
+              <div className="grid max-[767px]:gap-2 md:gap-3">
+                <div className="flex justify-between">
+                  <h2 className="font-payback text-center underline underline-offset-2 uppercase md:text-xl">
+                    Trying To Download
+                  </h2>
+                  <button
+                    className="text-2xl lg:hover:text-red-600 active:text-blue-600"
+                    onClick={closeModal}
+                  >
+                    <IoCloseSharp />
+                  </button>
+                </div>
+
+                <p className="md:text-xl md:leading-loose lg:text-sm">
+                  Sorry, the download isn't available right now. I truly
+                  appreciate your interest in my work! This is {""}
+                  <span className="font-bold max-[767px]:p-1 md:p-2 md:m-1 bg-blue-600 text-white lg:p-1">
+                    Nathaniel Owusu's{" "}
+                  </span>
+                  {""}
+                  portfolio. Feel free to explore more projects and reach out if
+                  you have any questions. Your support means a lot!
+                </p>
+              </div>
+              <div className="grid gap-4 md:text-xl lg:text-sm">
+                <Link
+                  to="https://www.linkedin.com/in/nathaniel-owusu-02187229a"
+                  target="_"
+                  className="flex items-center gap-2 active:text-blue-600 lg:hover:text-blue-600 lg:active:text-red-600 lg:cursor-pointer"
+                >
+                  <FaLinkedin /> Nathaniel Owusu
+                </Link>
+                <Link
+                  to="https://github.com/GANABA-25"
+                  target="_"
+                  className="flex items-center gap-2 active:text-blue-600 lg:hover:text-blue-600 lg:active:text-red-600 lg:cursor-pointer"
+                >
+                  <FaGithub />
+                  Nathaniel Owusu
+                </Link>
+                <h1 className="flex items-center gap-2 active:text-blue-600 lg:hover:text-blue-600 lg:active:text-red-600 lg:cursor-pointer">
+                  <SiGmail />
+                  NathanielOwusu01@gmail.com
+                </h1>
+              </div>
+            </div>
+          </Modal>
+
+          <button
+            onClick={openModal}
+            className="max-[767px]:my-4 max-[767px]:p-3 font-payback flex justify-center items-center gap-5 text-white bg-blue-600 hover:bg-blue-700 group hover:text-red-600 transition-all duration-300 md:p-4 md:my-4 lg:p-2"
+          >
             <span className="text-white md:text-2xl lg:text-xl">Download</span>
             <span className="group-hover:text-red-600">
               <LuDownload className="max-[767px]:text-2xl md:text-3xl lg:text-2xl" />
@@ -146,9 +215,14 @@ const Downloads = () => {
                 {fetchedComments.map((comments) => (
                   <CommentsList
                     key={comments._id}
+                    gameId={comments.gameId}
+                    _id={comments._id}
                     userName={comments.userName}
                     createdAt={comments.createdAt}
                     comment={comments.comment}
+                    replies={comments.replies}
+                    showReplyInput={showReplyInput}
+                    setShowReplyInput={setShowReplyInput}
                   />
                 ))}
               </div>
@@ -156,12 +230,21 @@ const Downloads = () => {
           </section>
         </section>
 
-        <section>
-          <Comments
-            gameId={payload.gameId}
-            refreshComments={fetchGameComments}
-          />
-        </section>
+        {showReplyInput ? (
+          <>
+            <Reply
+              refreshComments={fetchGameComments}
+              setShowReplyInput={setShowReplyInput}
+            />
+          </>
+        ) : (
+          <section>
+            <Comments
+              gameId={payload.gameId}
+              refreshComments={fetchGameComments}
+            />
+          </section>
+        )}
       </div>
       <Footer />
     </Fragment>
