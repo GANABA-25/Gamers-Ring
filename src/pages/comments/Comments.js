@@ -60,9 +60,9 @@ const Comments = ({ gameId, refreshComments }) => {
       <div className="my-10">
         <form onSubmit={submitHandler}>
           <div className="grid gap-2">
-            <labe className="max-[767px]:text-2xl font-payback md:text-4xl lg:text-2xl">
+            <label className="max-[767px]:text-2xl font-payback md:text-4xl lg:text-2xl">
               Leave Comments
-            </labe>
+            </label>
             <textarea
               className="max-[767px]:w-[18rem] border border-blue-600 outline-blue-700 p-2 md:w-[20rem]"
               placeholder="Please leave your comment"

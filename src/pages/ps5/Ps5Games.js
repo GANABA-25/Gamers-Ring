@@ -13,18 +13,21 @@ import Footer from "../Footer";
 
 const ps5RecentRelease = [
   {
+    id: 1,
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713869984/GAMERS%20RING/PS5%20GAMES/wallpaperflare.com_wallpaper_7_smugbj.jpg",
     title: "GOD OF WAR RAGNAROCK",
     date: "March 5, 2022",
   },
   {
+    id: 2,
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713869988/GAMERS%20RING/PS5%20GAMES/3618387_qgxhel.jpg",
     title: "FAR CRY 6",
     date: "January 25, 2021",
   },
   {
+    id: 3,
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713872139/GAMERS%20RING/PS5%20GAMES/wallpaperflare.com_wallpaper_12_ubzzyk.jpg",
     title: "DEATHLOOP",

@@ -19,7 +19,6 @@ function App() {
           <Route path="/Ps5Games" element={<Ps5Games />} />
           <Route path="/Downloads" element={<Downloads />} />
           <Route path="/SearchResultPage" element={<SearchResultPage />} />
-          {/* <Route path="/Ps3Games" element={<Contact />} /> */}
         </Routes>
       </BrowserRouter>
     </Fragment>

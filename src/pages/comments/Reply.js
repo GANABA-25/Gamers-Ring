@@ -69,9 +69,9 @@ const Reply = ({ setShowReplyInput, refreshComments }) => {
         <form onSubmit={submitHandler}>
           <div className="grid gap-2">
             <div className="flex items-center gap-2 font-serif">
-              <labe className="max-[767px]:text-2xl md:text-4xl lg:text-2xl">
+              <label className="max-[767px]:text-2xl md:text-4xl lg:text-2xl">
                 Reply to {commentUserName}
-              </labe>
+              </label>
               <h1
                 className="cursor-pointer lg:hover:text-blue-600 capitalize"
                 onClick={cancelReplyHandler}

@@ -48,7 +48,6 @@ const Downloads = () => {
       const response = await axios.get(
         `http://localhost:8090/user/gameComments/${gameId}`
       );
-      console.log(response);
       setFetchedComments(response.data.comments);
     } catch (error) {
       console.log("Error fetching comments ", error);
@@ -57,7 +56,7 @@ const Downloads = () => {
 
   useEffect(() => {
     fetchGameComments();
-  }, []);
+  });
 
   const openModal = () => {
     setIsModalOpen(true);

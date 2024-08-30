@@ -13,18 +13,21 @@ import Footer from "../Footer";
 
 const ps3RecentRelease = [
   {
+    id: 1,
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713776984/GAMERS%20RING/PS3%20GAMES/wallpaperflare.com_wallpaper_22_mb2wgp.jpg",
     title: "LittleBigPlanet 2",
     date: "March 5, 2022",
   },
   {
+    id: 2,
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713818012/GAMERS%20RING/PS3%20GAMES/1111261_zrjlcf.jpg",
     title: "Batman: Arkham City",
     date: "January 25, 2021",
   },
   {
+    id: 3,
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713776979/GAMERS%20RING/PS3%20GAMES/1787648_eu92sj.jpg",
     title: "Ni no Kuni",

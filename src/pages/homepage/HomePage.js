@@ -63,59 +63,73 @@ const HomePage = () => {
   return (
     <Fragment>
       <ScrollToTop />
-      <NavigationBar
-        background="https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713647417/GAMERS%20RING/PC%20GAMES/DOWNLOAD%20IMAGES/GHOST_RECON_1_3_cxqjai.jpg"
-        images={backgroundImages}
-      />
-      <div className="max-[767px]:w-[95%] md:w-[95%] m-auto">
-        <div className="font-serif lg:grid lg:grid-cols-4 lg:gap-3">
-          <section className="col-span-3">
-            {isLoading ? (
-              <div className="flex justify-center items-center w-full">
-                <Lottie
-                  className="w-[6rem]"
-                  animationData={loadingAnimation}
-                  loop={true}
-                />
-              </div>
-            ) : (
-              <>
-                <div className="grid max-[767px]:grid-cols-2 max-[767px]:gap-1 max-[767px]:gap-y-2 md:grid-cols-2 md:gap-2 md:gap-y-3 lg:grid-cols-3 transition-opacity duration-500">
-                  {fetchedData.map((pcGame) => (
-                    <GameComp
-                      key={pcGame._id}
-                      gameId={pcGame._id}
-                      image={pcGame.image}
-                      image1={pcGame.image1}
-                      image2={pcGame.image2}
-                      image3={pcGame.image3}
-                      title={pcGame.title}
-                      description={pcGame.description}
-                      downloadDescription={pcGame.downloadDescription}
-                      minimumSystemRequirement={pcGame.minimumSystemRequirement}
-                      recommendedSystemRequirement={
-                        pcGame.recommendedSystemRequirement
-                      }
-                      platform={pcGame.platform}
-                    />
-                  ))}
-                </div>
-                <Pagination
-                  totalPages={totalPages}
-                  handlePageClick={handlePageClick}
-                />
-              </>
-            )}
-          </section>
-          <section className="max-[767px]:my-4 col-span-1 md:my-8 lg:my-0">
-            <Information
-              recentGamesData={RecentlyAddedData}
-              platform="THIS PAGE CONTAINS ONLY PC GAMES"
-            />
-          </section>
+      {isLoading ? (
+        <div className="flex justify-center items-center w-screen h-screen">
+          <Lottie
+            className="w-[6rem]"
+            animationData={loadingAnimation}
+            loop={true}
+          />
         </div>
-      </div>
-      <Footer />
+      ) : (
+        <Fragment>
+          <NavigationBar
+            background="https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713647417/GAMERS%20RING/PC%20GAMES/DOWNLOAD%20IMAGES/GHOST_RECON_1_3_cxqjai.jpg"
+            images={backgroundImages}
+          />
+          <div className="max-[767px]:w-[95%] md:w-[95%] m-auto">
+            <div className="font-serif lg:grid lg:grid-cols-4 lg:gap-3">
+              {isLoading ? (
+                <div className="flex justify-center items-center w-screen h-full">
+                  <Lottie
+                    className="w-[6rem]"
+                    animationData={loadingAnimation}
+                    loop={true}
+                  />
+                </div>
+              ) : (
+                <>
+                  <section className="col-span-3">
+                    <div className="grid max-[767px]:grid-cols-2 max-[767px]:gap-1 max-[767px]:gap-y-2 md:grid-cols-2 md:gap-2 md:gap-y-3 lg:grid-cols-3 transition-opacity duration-500">
+                      {fetchedData.map((pcGame) => (
+                        <GameComp
+                          key={pcGame._id}
+                          gameId={pcGame._id}
+                          image={pcGame.image}
+                          image1={pcGame.image1}
+                          image2={pcGame.image2}
+                          image3={pcGame.image3}
+                          title={pcGame.title}
+                          description={pcGame.description}
+                          downloadDescription={pcGame.downloadDescription}
+                          minimumSystemRequirement={
+                            pcGame.minimumSystemRequirement
+                          }
+                          recommendedSystemRequirement={
+                            pcGame.recommendedSystemRequirement
+                          }
+                          platform={pcGame.platform}
+                        />
+                      ))}
+                    </div>
+                    <Pagination
+                      totalPages={totalPages}
+                      handlePageClick={handlePageClick}
+                    />
+                  </section>
+                  <section className="max-[767px]:my-4 col-span-1 md:my-8 lg:my-0">
+                    <Information
+                      recentGamesData={RecentlyAddedData}
+                      platform="THIS PAGE CONTAINS ONLY PC GAMES"
+                    />
+                  </section>
+                </>
+              )}
+            </div>
+          </div>
+          <Footer />
+        </Fragment>
+      )}
     </Fragment>
   );
 };

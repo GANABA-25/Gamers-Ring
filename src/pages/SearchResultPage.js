@@ -1,8 +1,10 @@
 import { Fragment, useEffect, useState } from "react";
 import axios from "axios";
+import Lottie from "lottie-react";
 import { useLocation } from "react-router-dom";
 import { useUserContext } from "../store/Auth-Context";
 
+import loadingAnimation from "../lottie/Animation - loading.json";
 import NavigationBar from "../components/NavigationBar";
 import Information from "../components/Information";
 import GameComp from "./components/GameComp";
@@ -49,6 +51,7 @@ const RecentlyAddedData = [
 ];
 
 const SearchResultPage = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [fetchedGames, setFetchedGames] = useState([]);
   const [fetchedGamesErrorMessage, setFetchedGamesErrorMessage] = useState("");
   const { search } = useLocation();
@@ -57,6 +60,7 @@ const SearchResultPage = () => {
 
   useEffect(() => {
     const fetchSearchedGames = async () => {
+      setIsLoading(true);
       try {
         const response = await axios.get(
           `http://localhost:8090/games/searchedGames/?searchedTerm=${searchTerm}&page=1`
@@ -73,6 +77,8 @@ const SearchResultPage = () => {
         } else {
           console.error("An unexpected error occurred:", error);
         }
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -90,55 +96,70 @@ const SearchResultPage = () => {
       />
       <div className="max-[767px]:w-[95%] md:w-[95%] m-auto">
         <div className="font-serif lg:grid lg:grid-cols-4 lg:gap-3">
-          <section className="col-span-3">
-            {fetchedGames.length === 0 ? (
-              <div className="grid gap-4 justify-center items-center">
-                <div className="flex gap-3">
-                  <h1>{fetchedGamesErrorMessage.message}</h1>
-                  <h1 className="text-red-600">
-                    {fetchedGamesErrorMessage.searchedTerm}
-                  </h1>
-                </div>
+          {isLoading ? (
+            <div className="flex justify-center items-center h-screen w-screen">
+              <Lottie
+                className="w-[6rem]"
+                animationData={loadingAnimation}
+                loop={true}
+              />
+            </div>
+          ) : (
+            <>
+              <section className="col-span-3">
+                {fetchedGames.length === 0 ? (
+                  <div className="grid gap-4 justify-center items-center">
+                    <div className="flex gap-3">
+                      <h1>{fetchedGamesErrorMessage.message}</h1>
+                      <h1 className="text-red-600">
+                        {fetchedGamesErrorMessage.searchedTerm}
+                      </h1>
+                    </div>
 
-                <div className="grid gap-4 justify-center items-center w-full">
-                  <h1 className="border-2 text-center p-4">No Results</h1>
-                </div>
-              </div>
-            ) : (
-              <>
-                <div className="grid max-[767px]:grid-cols-2 max-[767px]:gap-1 max-[767px]:gap-y-2 md:grid-cols-2 md:gap-2 md:gap-y-3 lg:grid-cols-3 transition-opacity duration-500">
-                  {fetchedGames.map((game) => (
-                    <GameComp
-                      key={game._id}
-                      gameId={game._id}
-                      image={game.image}
-                      image1={game.image1}
-                      image2={game.image2}
-                      image3={game.image3}
-                      title={game.title}
-                      description={game.description}
-                      downloadDescription={game.downloadDescription}
-                      minimumSystemRequirement={game.minimumSystemRequirement}
-                      recommendedSystemRequirement={
-                        game.recommendedSystemRequirement
-                      }
-                      category={game.category}
-                    />
-                  ))}
-                </div>
-                {/* <Pagination
+                    <div className="grid gap-4 justify-center items-center w-full">
+                      <h1 className="border-2 text-center p-4">No Results</h1>
+                    </div>
+                  </div>
+                ) : (
+                  <>
+                    <div className="grid max-[767px]:grid-cols-2 max-[767px]:gap-1 max-[767px]:gap-y-2 md:grid-cols-2 md:gap-2 md:gap-y-3 lg:grid-cols-3 transition-opacity duration-500">
+                      {fetchedGames.map((game) => (
+                        <GameComp
+                          key={game._id}
+                          gameId={game._id}
+                          image={game.image}
+                          image1={game.image1}
+                          image2={game.image2}
+                          image3={game.image3}
+                          title={game.title}
+                          description={game.description}
+                          downloadDescription={game.downloadDescription}
+                          minimumSystemRequirement={
+                            game.minimumSystemRequirement
+                          }
+                          recommendedSystemRequirement={
+                            game.recommendedSystemRequirement
+                          }
+                          category={game.category}
+                        />
+                      ))}
+                    </div>
+                    {/* <Pagination
                   totalPages={totalPages}
                   handlePageClick={handlePageClick}
                 /> */}
-              </>
-            )}
-          </section>
-          <section className="max-[767px]:my-4 col-span-1 md:my-8 lg:my-0">
-            <Information
-              recentGamesData={RecentlyAddedData}
-              platform="THIS PAGE CONTAINS ONLY PC GAMES"
-            />
-          </section>
+                  </>
+                )}
+              </section>
+
+              <section className="max-[767px]:my-4 col-span-1 md:my-8 lg:my-0">
+                <Information
+                  recentGamesData={RecentlyAddedData}
+                  platform="THIS PAGE CONTAINS ONLY PC GAMES"
+                />
+              </section>
+            </>
+          )}
         </div>
       </div>
       <Footer />

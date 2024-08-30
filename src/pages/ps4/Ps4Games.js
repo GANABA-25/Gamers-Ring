@@ -13,18 +13,21 @@ import Footer from "../Footer";
 
 const ps4RecentRelease = [
   {
+    id: 1,
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713830276/GAMERS%20RING/PS4%20GAMES/8406384_kj3lxs.jpg",
     title: "FIFA 23",
     date: "March 5, 2022",
   },
   {
+    id: 2,
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713830239/GAMERS%20RING/PS4%20GAMES/2335848_vcma90.png",
     title: "NIOH 2",
     date: "January 25, 2021",
   },
   {
+    id: 3,
     image:
       "https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713830266/GAMERS%20RING/PS4%20GAMES/1146381_cp2dx3.jpg",
     title: "SEKIRO: SHADWOS DIE TWICE",
