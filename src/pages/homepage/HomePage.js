@@ -9,6 +9,7 @@ import NavigationBar from "../../components/NavigationBar";
 import GameComp from "../components/GameComp";
 import Information from "../../components/Information";
 import loadingAnimation from "../../lottie/Animation - loading.json";
+import technicalAnimation from "../../lottie/Animation - Technical.json";
 import Pagination from "../../components/Pagination";
 import Footer from "../Footer";
 
@@ -52,7 +53,7 @@ const backgroundImages = [
 ];
 
 const HomePage = () => {
-  const { isLoading, fetchedData, setCurrentPage, totalPages } =
+  const { isLoading, fetchedData, setCurrentPage, totalPages, errorMsg } =
     useFetch(fetchPcGames);
 
   const handlePageClick = (data) => {
@@ -63,32 +64,35 @@ const HomePage = () => {
   return (
     <Fragment>
       <ScrollToTop />
-      {isLoading ? (
-        <div className="flex justify-center items-center w-screen h-screen">
-          <Lottie
-            className="w-[6rem]"
-            animationData={loadingAnimation}
-            loop={true}
-          />
+      {errorMsg ? (
+        <div className="grid justify-center items-center h-screen">
+          <h1 className="font-serif">
+            <Lottie
+              className="lg:w-[30rem]"
+              animationData={technicalAnimation}
+              loop={true}
+            />
+            {errorMsg}
+          </h1>
         </div>
       ) : (
-        <Fragment>
-          <NavigationBar
-            background="https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713647417/GAMERS%20RING/PC%20GAMES/DOWNLOAD%20IMAGES/GHOST_RECON_1_3_cxqjai.jpg"
-            images={backgroundImages}
-          />
-          <div className="max-[767px]:w-[95%] md:w-[95%] m-auto">
-            <div className="font-serif lg:grid lg:grid-cols-4 lg:gap-3">
-              {isLoading ? (
-                <div className="flex justify-center items-center w-screen h-full">
-                  <Lottie
-                    className="w-[6rem]"
-                    animationData={loadingAnimation}
-                    loop={true}
-                  />
-                </div>
-              ) : (
-                <>
+        <>
+          {isLoading ? (
+            <div className="flex justify-center items-center w-screen h-screen">
+              <Lottie
+                className="w-[6rem]"
+                animationData={loadingAnimation}
+                loop={true}
+              />
+            </div>
+          ) : (
+            <Fragment>
+              <NavigationBar
+                background="https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713647417/GAMERS%20RING/PC%20GAMES/DOWNLOAD%20IMAGES/GHOST_RECON_1_3_cxqjai.jpg"
+                images={backgroundImages}
+              />
+              <div className="max-[767px]:w-[95%] md:w-[95%] m-auto">
+                <div className="font-serif lg:grid lg:grid-cols-4 lg:gap-3">
                   <section className="col-span-3">
                     <div className="grid max-[767px]:grid-cols-2 max-[767px]:gap-1 max-[767px]:gap-y-2 md:grid-cols-2 md:gap-2 md:gap-y-3 lg:grid-cols-3 transition-opacity duration-500">
                       {fetchedData.map((pcGame) => (
@@ -123,12 +127,12 @@ const HomePage = () => {
                       platform="THIS PAGE CONTAINS ONLY PC GAMES"
                     />
                   </section>
-                </>
-              )}
-            </div>
-          </div>
-          <Footer />
-        </Fragment>
+                </div>
+              </div>
+              <Footer />
+            </Fragment>
+          )}
+        </>
       )}
     </Fragment>
   );

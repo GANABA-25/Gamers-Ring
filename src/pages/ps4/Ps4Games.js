@@ -5,6 +5,7 @@ import { useFetch } from "../../hooks/useFetch";
 
 import Information from "../../components/Information";
 import loadingAnimation from "../../lottie/Animation - loading.json";
+import technicalAnimation from "../../lottie/Animation - Technical.json";
 import GameComp from "../components/GameComp";
 import Pagination from "../../components/Pagination";
 import ScrollToTop from "../../components/ScrollToTop";
@@ -51,7 +52,7 @@ const backgroundImages = [
 ];
 
 const Ps4Games = () => {
-  const { isLoading, fetchedData, setCurrentPage, totalPages } =
+  const { isLoading, fetchedData, setCurrentPage, totalPages, errorMsg } =
     useFetch(fetchPs4Games);
 
   const handlePageClick = (data) => {
@@ -61,61 +62,76 @@ const Ps4Games = () => {
   return (
     <Fragment>
       <ScrollToTop />
-      <NavigationBar
-        background="https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713647417/GAMERS%20RING/PC%20GAMES/DOWNLOAD%20IMAGES/GHOST_RECON_1_3_cxqjai.jpg"
-        images={backgroundImages}
-      />
-      <div className="max-[767px]:w-[95%] md:w-[95%] m-auto">
-        <div className="font-serif lg:grid lg:grid-cols-4 lg:gap-3 ">
-          <section className="col-span-3">
-            {isLoading ? (
-              <div className="flex justify-center items-center w-full">
-                <Lottie
-                  className="w-[6rem]"
-                  animationData={loadingAnimation}
-                  loop={true}
-                />
-              </div>
-            ) : (
-              <>
-                <div className="grid max-[767px]:grid-cols-2 max-[767px]:gap-1 max-[767px]:gap-y-2 md:grid-cols-2 md:gap-2 md:gap-y-3 lg:grid-cols-3 transition-opacity duration-500">
-                  {fetchedData.map((ps4Game) => (
-                    <GameComp
-                      key={ps4Game._id}
-                      gameId={ps4Game._id}
-                      image={ps4Game.image}
-                      image1={ps4Game.image1}
-                      image2={ps4Game.image2}
-                      image3={ps4Game.image3}
-                      title={ps4Game.title}
-                      description={ps4Game.description}
-                      downloadDescription={ps4Game.downloadDescription}
-                      minimumSystemRequirement={
-                        ps4Game.minimumSystemRequirement
-                      }
-                      recommendedSystemRequirement={
-                        ps4Game.recommendedSystemRequirement
-                      }
-                      platform={ps4Game.platform}
-                    />
-                  ))}
-                </div>
-                <Pagination
-                  totalPages={totalPages}
-                  handlePageClick={handlePageClick}
-                />
-              </>
-            )}
-          </section>
-          <section className="max-[767px]:my-4 col-span-1 md:my-8 lg:my-0">
-            <Information
-              recentGamesData={ps4RecentRelease}
-              platform="THIS PAGE CONTAINS ONLY PS4 GAMES"
+      {errorMsg ? (
+        <div className="grid justify-center items-center h-screen">
+          <h1 className="font-serif">
+            <Lottie
+              className="lg:w-[30rem]"
+              animationData={technicalAnimation}
+              loop={true}
             />
-          </section>
+            {errorMsg}
+          </h1>
         </div>
-      </div>
-      <Footer />
+      ) : (
+        <Fragment>
+          {isLoading ? (
+            <div className="flex justify-center items-center w-screen h-screen">
+              <Lottie
+                className="w-[6rem]"
+                animationData={loadingAnimation}
+                loop={true}
+              />
+            </div>
+          ) : (
+            <Fragment>
+              <NavigationBar
+                background="https://res.cloudinary.com/dmdnq9vh8/image/upload/v1713647417/GAMERS%20RING/PC%20GAMES/DOWNLOAD%20IMAGES/GHOST_RECON_1_3_cxqjai.jpg"
+                images={backgroundImages}
+              />
+              <div className="max-[767px]:w-[95%] md:w-[95%] m-auto">
+                <div className="font-serif lg:grid lg:grid-cols-4 lg:gap-3 ">
+                  <section className="col-span-3">
+                    <div className="grid max-[767px]:grid-cols-2 max-[767px]:gap-1 max-[767px]:gap-y-2 md:grid-cols-2 md:gap-2 md:gap-y-3 lg:grid-cols-3 transition-opacity duration-500">
+                      {fetchedData.map((ps4Game) => (
+                        <GameComp
+                          key={ps4Game._id}
+                          gameId={ps4Game._id}
+                          image={ps4Game.image}
+                          image1={ps4Game.image1}
+                          image2={ps4Game.image2}
+                          image3={ps4Game.image3}
+                          title={ps4Game.title}
+                          description={ps4Game.description}
+                          downloadDescription={ps4Game.downloadDescription}
+                          minimumSystemRequirement={
+                            ps4Game.minimumSystemRequirement
+                          }
+                          recommendedSystemRequirement={
+                            ps4Game.recommendedSystemRequirement
+                          }
+                          platform={ps4Game.platform}
+                        />
+                      ))}
+                    </div>
+                    <Pagination
+                      totalPages={totalPages}
+                      handlePageClick={handlePageClick}
+                    />
+                  </section>
+                  <section className="max-[767px]:my-4 col-span-1 md:my-8 lg:my-0">
+                    <Information
+                      recentGamesData={ps4RecentRelease}
+                      platform="THIS PAGE CONTAINS ONLY PS4 GAMES"
+                    />
+                  </section>
+                </div>
+              </div>
+              <Footer />
+            </Fragment>
+          )}
+        </Fragment>
+      )}
     </Fragment>
   );
 };

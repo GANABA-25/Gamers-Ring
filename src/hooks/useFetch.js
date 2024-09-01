@@ -5,6 +5,7 @@ export const useFetch = (fetchFn) => {
   const [fetchedData, setFetchedData] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
+  const [errorMsg, setErrorMsg] = useState("");
 
   const fetchData = async (page) => {
     setIsLoading(true);
@@ -14,7 +15,10 @@ export const useFetch = (fetchFn) => {
       setTotalPages(totalPages);
       setFetchedData(data);
     } catch (error) {
-      console.log("Failed to fetch data", error);
+      setErrorMsg(
+        "We're currently experiencing some technical issues. Please try again later."
+      );
+      console.log(error);
     } finally {
       setIsLoading(false);
     }
@@ -30,5 +34,6 @@ export const useFetch = (fetchFn) => {
     currentPage,
     totalPages,
     setCurrentPage,
+    errorMsg,
   };
 };
