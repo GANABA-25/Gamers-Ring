@@ -53,11 +53,18 @@ const backgroundImages = [
 ];
 
 const HomePage = () => {
-  const { isLoading, fetchedData, setCurrentPage, totalPages, errorMsg } =
-    useFetch(fetchPcGames);
+  const {
+    isLoading,
+    fetchedData,
+    setCurrentPage,
+    currentPage,
+    totalPages,
+    errorMsg,
+  } = useFetch(fetchPcGames);
 
   const handlePageClick = (data) => {
     setCurrentPage(data.selected);
+    console.log("checking dataSelected in HomePage", data.selected);
     window.scrollTo(0, 0);
   };
 
@@ -116,10 +123,13 @@ const HomePage = () => {
                         />
                       ))}
                     </div>
-                    <Pagination
-                      totalPages={totalPages}
-                      handlePageClick={handlePageClick}
-                    />
+                    {totalPages > 0 && (
+                      <Pagination
+                        currentPage={currentPage}
+                        totalPages={totalPages}
+                        handlePageClick={handlePageClick}
+                      />
+                    )}
                   </section>
                   <section className="max-[767px]:my-4 col-span-1 md:my-8 lg:my-0">
                     <Information

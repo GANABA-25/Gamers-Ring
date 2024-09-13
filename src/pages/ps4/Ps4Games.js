@@ -52,8 +52,14 @@ const backgroundImages = [
 ];
 
 const Ps4Games = () => {
-  const { isLoading, fetchedData, setCurrentPage, totalPages, errorMsg } =
-    useFetch(fetchPs4Games);
+  const {
+    isLoading,
+    fetchedData,
+    setCurrentPage,
+    currentPage,
+    totalPages,
+    errorMsg,
+  } = useFetch(fetchPs4Games);
 
   const handlePageClick = (data) => {
     setCurrentPage(data.selected);
@@ -114,10 +120,13 @@ const Ps4Games = () => {
                         />
                       ))}
                     </div>
-                    <Pagination
-                      totalPages={totalPages}
-                      handlePageClick={handlePageClick}
-                    />
+                    {totalPages > 0 && (
+                      <Pagination
+                        currentPage={currentPage}
+                        totalPages={totalPages}
+                        handlePageClick={handlePageClick}
+                      />
+                    )}
                   </section>
                   <section className="max-[767px]:my-4 col-span-1 md:my-8 lg:my-0">
                     <Information
