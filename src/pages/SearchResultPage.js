@@ -2,7 +2,6 @@ import { Fragment, useEffect, useState } from "react";
 import axios from "axios";
 import Lottie from "lottie-react";
 import { useLocation } from "react-router-dom";
-import { useUserContext } from "../store/Auth-Context";
 
 import loadingAnimation from "../lottie/Animation - loading.json";
 import NavigationBar from "../components/NavigationBar";
@@ -53,7 +52,8 @@ const RecentlyAddedData = [
 const SearchResultPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [fetchedGames, setFetchedGames] = useState([]);
-  const [fetchedGamesErrorMessage, setFetchedGamesErrorMessage] = useState("");
+  const [fetchedGamesErrorMessage, setFetchedGamesErrorMessage] =
+    useState(null);
   const { search } = useLocation();
   const searchParams = new URLSearchParams(search);
   const searchTerm = searchParams.get("searchTerm");
@@ -107,7 +107,7 @@ const SearchResultPage = () => {
           ) : (
             <>
               <section className="col-span-3">
-                {fetchedGames.length === 0 ? (
+                {fetchedGamesErrorMessage ? (
                   <div className="grid gap-4 justify-center items-center">
                     <div className="flex gap-3">
                       <h1>{fetchedGamesErrorMessage.message}</h1>

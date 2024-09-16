@@ -59,10 +59,10 @@ const GameComp = (props) => {
               state: { payload: props },
             })
           }
-          className="mt-auto m-2 max-[767px]:p-3 font-payback flex justify-center items-center gap-5 text-white bg-blue-600 hover:bg-blue-700 group hover:text-red-600 relative transition-all duration-300 md:p-4 lg:p-2"
+          className="mt-auto m-2 max-[767px]:p-3 max-[767px]:active:bg-blue-700 md:active:bg-blue-700 font-payback flex justify-center items-center gap-5 text-white bg-blue-600 lg:hover:bg-blue-700 group lg:hover:text-red-600 relative transition-all duration-300 md:p-4 lg:p-2"
         >
           <span className="text-white md:text-2xl lg:text-xl">Download</span>
-          <span className="group-hover:text-red-600">
+          <span className="lg:group-hover:text-red-600">
             <LuDownload className="max-[767px]:text-2xl md:text-3xl lg:text-2xl" />
           </span>
         </button>

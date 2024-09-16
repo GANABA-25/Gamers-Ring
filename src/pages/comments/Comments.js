@@ -89,7 +89,7 @@ const Comments = ({ gameId, refreshComments }) => {
               required
             />
           </div>
-          <button className="max-[767px]:w-[12rem] max-[767px]:text-xl max-[767px]:p-2 font-serif bg-blue-600 hover:bg-blue-700 text-white flex items-center gap-2 md:w-[14rem md text-3xl md:p-4 lg:text-xl lg:p-3">
+          <button className="max-[767px]:w-[12rem] max-[767px]:text-xl max-[767px]:p-2 max-[767px]:active:bg-blue-700 md:active:bg-blue-700 font-serif bg-blue-600 lg:hover:bg-blue-700 text-white flex items-center gap-2 md:w-[14rem md text-3xl md:p-4 lg:text-xl lg:p-3">
             Post Comment
             {isLoading ? (
               <Lottie

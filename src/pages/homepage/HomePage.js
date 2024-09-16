@@ -64,7 +64,6 @@ const HomePage = () => {
 
   const handlePageClick = (data) => {
     setCurrentPage(data.selected);
-    console.log("checking dataSelected in HomePage", data.selected);
     window.scrollTo(0, 0);
   };
 
