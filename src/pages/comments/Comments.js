@@ -41,6 +41,8 @@ const Comments = ({ gameId, refreshComments }) => {
         userComment
       );
 
+      console.log("Checking response", response);
+
       if (refreshComments) refreshComments();
     } catch (error) {
       console.log("error posting comment", error);

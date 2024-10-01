@@ -1,5 +1,5 @@
 import { Fragment, useState, useEffect, useRef } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import { FaBars } from "react-icons/fa6";
 import { PiInstagramLogoFill } from "react-icons/pi";
@@ -96,7 +96,7 @@ const NavigationBar = ({ background, images }) => {
           <div className="text-black text-md flex justify-between py-2 cursor-pointer md:text-xl border-b-4">
             <div className="">
               <h1 className="font-payback max-[767px]:text-2xl md:text-4xl">
-                Gamers Ring
+                Gamerz Ring
               </h1>
             </div>
 
@@ -141,7 +141,7 @@ const NavigationBar = ({ background, images }) => {
             <div className="max-[767px]:mt-3 flex justify-between lg:hidden ">
               <span className="flex justify-end gap-1 text-xl md:text-3xl md:gap-3">
                 <h1 className="font-payback tracking-wider hidden md:block">
-                  Gamers Ring
+                  Gamerz Ring
                 </h1>
                 <PiInstagramLogoFill className="border-2 rounded-sm p-[1px]" />
                 <BsTwitterX className="border-2 rounded-sm p-[1px]" />
@@ -160,7 +160,7 @@ const NavigationBar = ({ background, images }) => {
             <div className="hidden lg:flex md:justify-between">
               <div className="lg:flex justify-center items-center lg:gap-8">
                 <span className="md:flex md:items-center md:gap-2 md:text-xl">
-                  <h1 className="font-nostrum tracking-wider">Gamers Ring</h1>
+                  <h1 className="font-nostrum tracking-wider">Gamerz Ring</h1>
                   <PiInstagramLogoFill className="border-2 rounded-sm p-[1px]" />
                   <BsTwitterX className="border-2 rounded-sm p-[1px]" />
                   <FaYoutube className="border-2 rounded-sm p-[1px]" />
@@ -211,10 +211,10 @@ const NavigationBar = ({ background, images }) => {
               <div className="mx-3 absolute top-0 bottom-0 flex justify-center items-center max-[767px]:text-xs">
                 <span>
                   <h1 className="font-nostrum max-[767px]:text-[3.3rem] tracking-wide md:text-8xl lg:text-[9rem]">
-                    Gamers
+                    Gamerz
                   </h1>
                   <p className="hidden md:block md:text-xl lg:text-sm">
-                    Welcome to Gamers Ring - where gaming dreams come alive!
+                    Welcome to Gamerz Ring - where gaming dreams come alive!
                     Download your favorite titles for
                     <span className="hidden lg:block md:hidden">
                       PS4, and PS5. Join our vibrant community for discussions,
@@ -253,7 +253,7 @@ const NavigationBar = ({ background, images }) => {
                       Explore our vast library of games covering various genres
                       such as action, adventure, RPG, and more.
                       <br className="hidden md:block" /> Whether you're a casual
-                      gamer or a hardcore enthusiast, Gamers Ring has something
+                      gamer or a hardcore enthusiast, Gamerz Ring has something
                       for everyone!
                     </span>
                   </p>
@@ -275,7 +275,7 @@ const NavigationBar = ({ background, images }) => {
             <div className="flex justify-between lg:hidden ">
               <span className="flex justify-end gap-3 md:gap-3">
                 <h1 className="font-payback tracking-wider hidden md:block md:text-3xl">
-                  Gamers Ring
+                  Gamerz Ring
                 </h1>
                 <PiInstagramLogoFill className="text-2xl md:text-3xl border-2 rounded-sm" />
                 <BsTwitterX className="text-2xl md:text-3xl border-2 rounded-sm" />
@@ -302,7 +302,7 @@ const NavigationBar = ({ background, images }) => {
             <div className="hidden lg:flex md:justify-between lg:my-2">
               <div className="lg:flex lg:gap-8">
                 <span className="md:flex md:items-center md:gap-2 md:text-xl">
-                  <h1 className="font-nostrum">Gamers Ring</h1>
+                  <h1 className="font-nostrum">Gamerz Ring</h1>
                   <PiInstagramLogoFill className="border-2 rounded-sm p-[1px]" />
                   <BsTwitterX className="border-2 rounded-sm p-[1px]" />
                   <FaYoutube className="border-2 rounded-sm p-[1px]" />

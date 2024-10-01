@@ -22,7 +22,7 @@ function StringSplitter({ text, delimiter }) {
   return (
     <div>
       {parts.map((part, index) => (
-        <div key={index}>{part}</div>
+        <p key={index}>{part}</p>
       ))}
     </div>
   );
@@ -90,9 +90,9 @@ const Downloads = () => {
             <h1 className="max-[767px]:text-3xl max-[767px]:my-2 font-bold font-payback tracking-wider md:text-5xl md:my-4 lg:text-3xl">
               {payload.title}
             </h1>
-            <p className="font-serif md:text-xl tracking-wider lg:text-sm">
+            <div className="font-serif md:text-xl tracking-wider lg:text-sm">
               <StringSplitter text={myString4} delimiter={delimiter} />
-            </p>
+            </div>
           </div>
 
           {payload.minimumSystemRequirement &&
