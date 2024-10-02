@@ -63,7 +63,7 @@ const SearchResultPage = () => {
       setIsLoading(true);
       try {
         const response = await axios.get(
-          `http://localhost:8090/games/searchedGames/?searchedTerm=${searchTerm}&page=1`
+          `https://gamerring-backend.onrender.com/games/searchedGames/?searchedTerm=${searchTerm}&page=1`
         );
 
         if (response.status === 200) {

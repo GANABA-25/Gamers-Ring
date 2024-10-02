@@ -37,7 +37,7 @@ const Comments = ({ gameId, refreshComments }) => {
     setIsLoading(true);
     try {
       const response = await axios.post(
-        `http://localhost:8090/user/comment/${gameId}`,
+        `https://gamerring-backend.onrender.com/user/comment/${gameId}`,
         userComment
       );
 

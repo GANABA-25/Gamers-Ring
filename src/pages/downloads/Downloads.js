@@ -46,7 +46,7 @@ const Downloads = () => {
 
     try {
       const response = await axios.get(
-        `http://localhost:8090/user/gameComments/${gameId}`
+        `https://gamerring-backend.onrender.com/user/gameComments/${gameId}`
       );
       setFetchedComments(response.data.comments);
     } catch (error) {
